@@ -1,4 +1,4 @@
-name: compas_rrc
+cconname: compas_rrc
 channels:
   - conda-forge
   - defaults
@@ -79,3 +79,5 @@ dependencies:
   - pip:
       - autobahn==24.4.2
       - roslibpy==1.8.1
+      - PySide6==6.7.3
+      - compas_viewer
