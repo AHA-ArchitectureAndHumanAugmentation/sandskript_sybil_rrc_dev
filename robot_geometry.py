@@ -23,16 +23,21 @@ The robot's own base position is separate geometry, not defined here yet.
 It will matter later for reach and collision checks, once we build those.
 """
 
-from compas.geometry import Frame, Vector, cross_vectors
+from compas.geometry import Frame, Point, Vector, cross_vectors
 
 # TODO: replace with real values measured in Rhino (mm, robot world coords)
-SPHERE_CENTER = (0.0, 0.0, 0.0)   # sits behind S.GA, offset from robot centre
+
+SPHERE_CENTER = Point(0.0, 0.0, 0.0)   # sits behind S.GA, offset from robot centre
 SPHERE_RADIUS = 1000.0            # centre to S.GA surface
 STANDOFF_DISTANCE = 100.0         # nozzle clearance, measured from S.GA
 
+# World / work-object reference frame, used when converting raw drawing
+# data into COMPAS geometry.
 DEFAULT_WOBJ_ORIGIN = [0.0, 0.0, 0.0]
 DEFAULT_WOBJ_XAXIS = [1000.0, 0.0, 0.0]
 DEFAULT_WOBJ_YAXIS = [0.0, 1000.0, 0.0]
+
+
 
 
 def spray_direction(point):
