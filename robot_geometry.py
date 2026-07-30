@@ -30,6 +30,10 @@ SPHERE_CENTER = (0.0, 0.0, 0.0)   # sits behind S.GA, offset from robot centre
 SPHERE_RADIUS = 1000.0            # centre to S.GA surface
 STANDOFF_DISTANCE = 100.0         # nozzle clearance, measured from S.GA
 
+DEFAULT_WOBJ_ORIGIN = [0.0, 0.0, 0.0]
+DEFAULT_WOBJ_XAXIS = [1000.0, 0.0, 0.0]
+DEFAULT_WOBJ_YAXIS = [0.0, 1000.0, 0.0]
+
 
 def spray_direction(point):
     """Direction the nozzle sprays. Away from centre, outward through the point."""
