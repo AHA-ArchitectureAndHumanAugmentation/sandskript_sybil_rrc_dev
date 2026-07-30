@@ -14,12 +14,14 @@ SANDSKRIPT_COMPAS_RRC/
 
 Usage:
     python 301_convert_to_compas_json.py
+    python 301_convert_to_compas_json.py toolpath/some_other_file.json
 """
 
 from __future__ import annotations
 
 import json
 import math
+import sys
 import uuid
 from pathlib import Path
 from typing import Any, Iterable
@@ -28,12 +30,14 @@ from compas.data import json_load
 from compas.geometry import Frame
 
 from robot_geometry import DEFAULT_WOBJ_ORIGIN, DEFAULT_WOBJ_XAXIS, DEFAULT_WOBJ_YAXIS
-from view_utils import show_frames
+from view_utils import show_comparison
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 
-# Change this line to test a different file.
-INPUT_PATH = PROJECT_ROOT / "data" / "toolpath_circle.json"
+# Change this line to test a different file, or pass one as an argument.
+DEFAULT_INPUT_PATH = PROJECT_ROOT / "toolpath" / "path.json"
+INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_INPUT_PATH
+
 OUTPUT_DIR = PROJECT_ROOT / "converted_toolpath"
 OUTPUT_PATH = OUTPUT_DIR / f"{INPUT_PATH.stem}_compas.json"
 
@@ -62,7 +66,6 @@ def scaled_vector(
     if not all(math.isfinite(value) for value in result):
         raise ValueError(f"Vector contains a non-finite value: {result!r}")
 
-    # Replace -0.0 with 0.0 for cleaner JSON.
     return [0.0 if abs(value) < 1e-12 else value for value in result]
 
 
@@ -134,47 +137,40 @@ def convert_to_compas(source: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def main() -> None:
-    if not INPUT_PATH.is_file():
-        raise FileNotFoundError(
-            f"Could not find the input toolpath:\n{INPUT_PATH}"
-        )
+if not INPUT_PATH.is_file():
+    raise FileNotFoundError(f"Could not find the input toolpath:\n{INPUT_PATH}")
 
-    with INPUT_PATH.open("r", encoding="utf-8") as input_file:
-        source = json.load(input_file)
+with INPUT_PATH.open("r", encoding="utf-8") as input_file:
+    source = json.load(input_file)
 
-    if "strokes" in source:
-        frames = [
-            Frame(item["plane"]["origin"], item["plane"]["xaxis"], item["plane"]["yaxis"])
-            for stroke in source["strokes"]
-            for item in stroke
-        ]
-        print("Showing raw input. Close the window to continue.")
-        show_frames(frames)
+if "strokes" in source:
+    raw_frames = [
+        Frame(item["plane"]["origin"], item["plane"]["xaxis"], item["plane"]["yaxis"])
+        for stroke in source["strokes"]
+        for item in stroke
+    ]
 
-        converted = convert_to_compas(source)
+    converted = convert_to_compas(source)
 
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        with OUTPUT_PATH.open("w", encoding="utf-8") as output_file:
-            json.dump(converted, output_file, indent=4, ensure_ascii=False)
-            output_file.write("\n")
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    with OUTPUT_PATH.open("w", encoding="utf-8") as output_file:
+        json.dump(converted, output_file, indent=4, ensure_ascii=False)
+        output_file.write("\n")
 
-        print(f"Input:  {INPUT_PATH}")
-        print(f"Output: {OUTPUT_PATH}")
-        print(f"Strokes converted: {len(converted['strokes'])}")
-        print(f"Frames converted: {len(converted['frames'])}")
+    print(f"Input:  {INPUT_PATH}")
+    print(f"Output: {OUTPUT_PATH}")
+    print(f"Strokes converted: {len(converted['strokes'])}")
+    print(f"Frames converted: {len(converted['frames'])}")
 
-        print("Showing converted output.")
-        show_frames(json_load(OUTPUT_PATH)["frames"])
+    converted_frames = json_load(OUTPUT_PATH)["frames"]
+    show_comparison(raw_frames, converted_frames)
 
-    else:
-        frames = [
-            Frame(f["data"]["point"], f["data"]["xaxis"], f["data"]["yaxis"])
-            for f in source["frames"]
-        ]
-        print("Already in frames format. Showing as-is.")
-        show_frames(frames)
-
-
-if __name__ == "__main__":
-    main()
+else:
+    frames = [
+        Frame(f["data"]["point"], f["data"]["xaxis"], f["data"]["yaxis"])
+        for f in source["frames"]
+    ]
+    print("Already in frames format. No conversion needed.")
+    print(f"Input: {INPUT_PATH}")
+    print(f"Frames: {len(frames)}")
+    show_comparison(frames, frames)

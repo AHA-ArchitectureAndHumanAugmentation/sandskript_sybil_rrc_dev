@@ -16,16 +16,25 @@ The repository contains:
 ## Repository Structure
 
 ```text
-sandskript_compas_rrc/
-├── 301_toolpath_generator.ghx   # Grasshopper toolpath generator
-├── 302_send_to_robot.py         # ABB movement and spray-control script
-├── env_compas_rrc.yml           # Conda environment definition
+sandskript_sybil_rrc_dev/
+├── toolpath_generator.ghx        # Grasshopper toolpath generator (manual test paths)
+├── robot_geometry.py              # Shared geometry config: sphere orientation, world origin
+├── view_utils.py                  # Shared compas_viewer display logic
+├── 301_convert_to_compas_json.py  # Raw strokes -> COMPAS frames (auto-detects already-converted files)
+├── 302_process_toolpath.py        # Offset + safe frames -> robot-ready JSON
+├── 303_send_to_robot.py           # ABB movement and spray-control script
+├── env_compas_rrc.yml             # Conda environment definition
+├── .gitignore                     # Ignores __pycache__/ and generated converted_toolpath/*.json
+├── toolpath/                      # Lin's incoming raw drawing JSON lands here
+├── converted_toolpath/            # Output of 301 (generated, gitignored)
+├── processed_toolpath/            # Output of 302 (generated)
 ├── data/
-│   ├── toolpath.json            # Example wavy toolpath, 15 frames
-│   ├── toolpath_circle.json     # Example circular toolpath, 15 frames
-│   └── toolpath_line.json       # Example linear toolpath, 15 frames
+│   ├── toolpath.json
+│   ├── toolpath_circle.json
+│   ├── toolpath_line.json
+│   └── toolpath_wave_z_direction.json
 └── docker/
-    └── docker-compose.yml       # ROS and ABB driver services
+    └── docker-compose.yml
 ```
 
 ## Workflow
@@ -588,3 +597,5 @@ Before every physical run:
 MAS Architecture and Digital Fabrication  
 ETH Zürich  
 2026
+
+
