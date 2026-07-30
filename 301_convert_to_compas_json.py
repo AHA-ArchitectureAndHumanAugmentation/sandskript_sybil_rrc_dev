@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Convert toolpath/path.json into a COMPAS geometry JSON file.
+Convert a raw drawing toolpath JSON into a COMPAS geometry JSON file.
+If the file is already converted, it's just shown as-is, no conversion.
 
 Project structure:
 
@@ -9,7 +10,10 @@ SANDSKRIPT_COMPAS_RRC/
 │   └── path.json
 ├── converted_toolpath/
 │   └── path_compas.json
-└── 303_convert_to_compas_json.py
+└── 301_convert_to_compas_json.py
+
+Usage:
+    python 301_convert_to_compas_json.py
 """
 
 from __future__ import annotations
@@ -20,21 +24,24 @@ import uuid
 from pathlib import Path
 from typing import Any, Iterable
 
+from compas.data import json_load
+from compas.geometry import Frame
 
-# The folder containing this Python file is treated as the project root.
+from robot_geometry import DEFAULT_WOBJ_ORIGIN, DEFAULT_WOBJ_XAXIS, DEFAULT_WOBJ_YAXIS
+from view_utils import show_frames
+
 PROJECT_ROOT = Path(__file__).resolve().parent
 
-INPUT_PATH = PROJECT_ROOT / "toolpath" / "path.json"
+# Change this line to test a different file.
+INPUT_PATH = PROJECT_ROOT / "data" / "toolpath_circle.json"
 OUTPUT_DIR = PROJECT_ROOT / "converted_toolpath"
-OUTPUT_PATH = OUTPUT_DIR / "path_compas_1.json"
+OUTPUT_PATH = OUTPUT_DIR / f"{INPUT_PATH.stem}_compas.json"
 
-# Input coordinates are stored in metres.
-# COMPAS RRC robot coordinates are normally used in millimetres.
-COORDINATE_SCALE = 1000.0
+# Input coordinates are currently in metres.
+# COMPAS RRC robot coordinates are in millimetres.
 
-DEFAULT_WOBJ_ORIGIN = [0.0, 0.0, 0.0]
-DEFAULT_WOBJ_XAXIS = [1000.0, 0.0, 0.0]
-DEFAULT_WOBJ_YAXIS = [0.0, 1000.0, 0.0]
+COORDINATE_SCALE = 1000.0   # metres -> millimetres (current test data)
+# COORDINATE_SCALE = 1.0    # uncomment this line (and comment the one above) once Lin sends millimetres directly
 
 
 def new_guid() -> str:
@@ -85,19 +92,15 @@ def make_compas_point(point: Iterable[Any]) -> dict[str, Any]:
     }
 
 
-def extract_frames(source: dict[str, Any]) -> list[dict[str, Any]]:
-    """Flatten every point from every stroke into one COMPAS frame list."""
-    strokes = source.get("strokes")
+def extract_strokes(source: dict[str, Any]) -> list[list[dict[str, Any]]]:
+    """Convert every raw stroke into its own list of COMPAS frames."""
+    stroke_frames: list[list[dict[str, Any]]] = []
 
-    if not isinstance(strokes, list):
-        raise ValueError("Input JSON must contain a top-level 'strokes' list.")
-
-    frames: list[dict[str, Any]] = []
-
-    for stroke_index, stroke in enumerate(strokes):
+    for stroke_index, stroke in enumerate(source["strokes"]):
         if not isinstance(stroke, list):
             raise ValueError(f"Stroke {stroke_index} is not a list.")
 
+        frames: list[dict[str, Any]] = []
         for point_index, item in enumerate(stroke):
             try:
                 plane = item["plane"]
@@ -110,21 +113,21 @@ def extract_frames(source: dict[str, Any]) -> list[dict[str, Any]]:
                     f"point {point_index}."
                 ) from error
 
-            frames.append(
-                make_compas_frame(
-                    point=origin,
-                    xaxis=xaxis,
-                    yaxis=yaxis,
-                )
-            )
+            frames.append(make_compas_frame(point=origin, xaxis=xaxis, yaxis=yaxis))
 
-    return frames
+        stroke_frames.append(frames)
+
+    return stroke_frames
 
 
 def convert_to_compas(source: dict[str, Any]) -> dict[str, Any]:
-    """Convert the source toolpath into the COMPAS JSON structure."""
+    """Convert raw stroke data into the COMPAS JSON structure."""
+    stroke_frames = extract_strokes(source)
+    flat_frames = [frame for stroke in stroke_frames for frame in stroke]
+
     return {
-        "frames": extract_frames(source),
+        "strokes": stroke_frames,
+        "frames": flat_frames,
         "wobj_origin": make_compas_point(DEFAULT_WOBJ_ORIGIN),
         "wobj_xaxis": make_compas_point(DEFAULT_WOBJ_XAXIS),
         "wobj_yaxis": make_compas_point(DEFAULT_WOBJ_YAXIS),
@@ -140,22 +143,37 @@ def main() -> None:
     with INPUT_PATH.open("r", encoding="utf-8") as input_file:
         source = json.load(input_file)
 
-    converted = convert_to_compas(source)
+    if "strokes" in source:
+        frames = [
+            Frame(item["plane"]["origin"], item["plane"]["xaxis"], item["plane"]["yaxis"])
+            for stroke in source["strokes"]
+            for item in stroke
+        ]
+        print("Showing raw input. Close the window to continue.")
+        show_frames(frames)
 
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        converted = convert_to_compas(source)
 
-    with OUTPUT_PATH.open("w", encoding="utf-8") as output_file:
-        json.dump(
-            converted,
-            output_file,
-            indent=4,
-            ensure_ascii=False,
-        )
-        output_file.write("\n")
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        with OUTPUT_PATH.open("w", encoding="utf-8") as output_file:
+            json.dump(converted, output_file, indent=4, ensure_ascii=False)
+            output_file.write("\n")
 
-    print(f"Input:  {INPUT_PATH}")
-    print(f"Output: {OUTPUT_PATH}")
-    print(f"Frames converted: {len(converted['frames'])}")
+        print(f"Input:  {INPUT_PATH}")
+        print(f"Output: {OUTPUT_PATH}")
+        print(f"Strokes converted: {len(converted['strokes'])}")
+        print(f"Frames converted: {len(converted['frames'])}")
+
+        print("Showing converted output.")
+        show_frames(json_load(OUTPUT_PATH)["frames"])
+
+    else:
+        frames = [
+            Frame(f["data"]["point"], f["data"]["xaxis"], f["data"]["yaxis"])
+            for f in source["frames"]
+        ]
+        print("Already in frames format. Showing as-is.")
+        show_frames(frames)
 
 
 if __name__ == "__main__":
