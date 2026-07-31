@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Process a converted toolpath into a robot-ready JSON file.
 
-Just press Run -- edit INPUT_PATH below to test a different file.
+Data flows: data/in -> data/compas -> data/processed -> (data/send_to_robot)
+
+Usage: python 302_process_toolpath.py data/compas/some_file_compas.json
 """
 
+import sys
 from pathlib import Path
 
 from compas.data import json_dump, json_load
@@ -13,8 +16,15 @@ from view_utils import show_comparison
 
 ROOT = Path(__file__).resolve().parent
 
-import sys
-INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "converted_toolpath" / "toolpath_circle_compas.json"
+DEFAULT_INPUT_PATH = ROOT / "data" / "compas" / "path_compas.json"
+INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_INPUT_PATH
+
+# Strip "_compas" from the name if present, so the next stage's suffix
+# reads cleanly: "<name>_compas.json" -> "<name>_processed.json",
+# not "<name>_compas_processed.json".
+BASE_NAME = INPUT_PATH.stem
+if BASE_NAME.endswith("_compas"):
+    BASE_NAME = BASE_NAME[: -len("_compas")]
 
 TOOLPATH_OFFSET = Vector(0, 0, 400.0)
 SAFE_OFFSET = 200.0
@@ -31,9 +41,9 @@ if not frames:
 offset_frames = [f.translated(TOOLPATH_OFFSET) for f in frames]
 processed = [safe_frame(offset_frames[0])] + offset_frames + [safe_frame(offset_frames[-1])]
 
-outdir = ROOT / "processed_toolpath"
+outdir = ROOT / "data" / "processed"
 outdir.mkdir(exist_ok=True)
-outfile = outdir / f"{INPUT_PATH.stem}_ready.json"
+outfile = outdir / f"{BASE_NAME}_processed.json"
 json_dump({"frames": processed}, outfile)
 
 print(f"Saved {len(processed)} frames to {outfile}")

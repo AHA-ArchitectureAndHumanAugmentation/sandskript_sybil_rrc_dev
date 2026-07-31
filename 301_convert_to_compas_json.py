@@ -3,18 +3,11 @@
 Convert a raw drawing toolpath JSON into a COMPAS geometry JSON file.
 If the file is already converted, it's just shown as-is, no conversion.
 
-Project structure:
-
-SANDSKRIPT_COMPAS_RRC/
-├── toolpath/
-│   └── path.json
-├── converted_toolpath/
-│   └── path_compas.json
-└── 301_convert_to_compas_json.py
+Data flows: data/in -> data/compas -> data/processed -> (data/send_to_robot)
 
 Usage:
     python 301_convert_to_compas_json.py
-    python 301_convert_to_compas_json.py toolpath/some_other_file.json
+    python 301_convert_to_compas_json.py data/in/some_folder/path.json
 """
 
 from __future__ import annotations
@@ -34,47 +27,37 @@ from view_utils import show_comparison
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 
-# Change this line to test a different file, or pass one as an argument.
-DEFAULT_INPUT_PATH = PROJECT_ROOT / "toolpath" / "path.json"
+DEFAULT_INPUT_PATH = PROJECT_ROOT / "data" / "in" / "path.json"
 INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_INPUT_PATH
 
-OUTPUT_DIR = PROJECT_ROOT / "converted_toolpath"
-OUTPUT_PATH = OUTPUT_DIR / f"{INPUT_PATH.stem}_compas.json"
+# If the filename itself is generic ("path.json", used by every capture),
+# fall back to the parent folder's name -- that's where the real
+# uniqueness lives, e.g. "2026-07-27_11-50-11".
+BASE_NAME = INPUT_PATH.stem
+if BASE_NAME == "path":
+    BASE_NAME = INPUT_PATH.parent.name
 
-# Input coordinates are currently in metres.
-# COMPAS RRC robot coordinates are in millimetres.
+OUTPUT_DIR = PROJECT_ROOT / "data" / "compas"
+OUTPUT_PATH = OUTPUT_DIR / f"{BASE_NAME}_compas.json"
 
 COORDINATE_SCALE = 1000.0   # metres -> millimetres (current test data)
 # COORDINATE_SCALE = 1.0    # uncomment this line (and comment the one above) once Lin sends millimetres directly
 
 
 def new_guid() -> str:
-    """Create a unique GUID for a serialized COMPAS object."""
     return str(uuid.uuid4())
 
 
-def scaled_vector(
-    values: Iterable[Any],
-    scale: float = 1.0,
-) -> list[float]:
-    """Validate a 3D vector and optionally scale it."""
+def scaled_vector(values: Iterable[Any], scale: float = 1.0) -> list[float]:
     result = [float(value) * scale for value in values]
-
     if len(result) != 3:
         raise ValueError(f"Expected a 3D vector, received: {result!r}")
-
     if not all(math.isfinite(value) for value in result):
         raise ValueError(f"Vector contains a non-finite value: {result!r}")
-
     return [0.0 if abs(value) < 1e-12 else value for value in result]
 
 
-def make_compas_frame(
-    point: Iterable[Any],
-    xaxis: Iterable[Any],
-    yaxis: Iterable[Any],
-) -> dict[str, Any]:
-    """Create a serialized COMPAS Frame."""
+def make_compas_frame(point: Iterable[Any], xaxis: Iterable[Any], yaxis: Iterable[Any]) -> dict[str, Any]:
     return {
         "dtype": "compas.geometry/Frame",
         "data": {
@@ -87,7 +70,6 @@ def make_compas_frame(
 
 
 def make_compas_point(point: Iterable[Any]) -> dict[str, Any]:
-    """Create a serialized COMPAS Point."""
     return {
         "dtype": "compas.geometry/Point",
         "data": scaled_vector(point),
@@ -96,13 +78,10 @@ def make_compas_point(point: Iterable[Any]) -> dict[str, Any]:
 
 
 def extract_strokes(source: dict[str, Any]) -> list[list[dict[str, Any]]]:
-    """Convert every raw stroke into its own list of COMPAS frames."""
     stroke_frames: list[list[dict[str, Any]]] = []
-
     for stroke_index, stroke in enumerate(source["strokes"]):
         if not isinstance(stroke, list):
             raise ValueError(f"Stroke {stroke_index} is not a list.")
-
         frames: list[dict[str, Any]] = []
         for point_index, item in enumerate(stroke):
             try:
@@ -112,22 +91,16 @@ def extract_strokes(source: dict[str, Any]) -> list[list[dict[str, Any]]]:
                 yaxis = plane["yaxis"]
             except (KeyError, TypeError) as error:
                 raise ValueError(
-                    f"Missing plane information at stroke {stroke_index}, "
-                    f"point {point_index}."
+                    f"Missing plane information at stroke {stroke_index}, point {point_index}."
                 ) from error
-
             frames.append(make_compas_frame(point=origin, xaxis=xaxis, yaxis=yaxis))
-
         stroke_frames.append(frames)
-
     return stroke_frames
 
 
 def convert_to_compas(source: dict[str, Any]) -> dict[str, Any]:
-    """Convert raw stroke data into the COMPAS JSON structure."""
     stroke_frames = extract_strokes(source)
     flat_frames = [frame for stroke in stroke_frames for frame in stroke]
-
     return {
         "strokes": stroke_frames,
         "frames": flat_frames,
@@ -166,10 +139,7 @@ if "strokes" in source:
     show_comparison(raw_frames, converted_frames)
 
 else:
-    frames = [
-        Frame(f["data"]["point"], f["data"]["xaxis"], f["data"]["yaxis"])
-        for f in source["frames"]
-    ]
+    frames = [Frame(f["data"]["point"], f["data"]["xaxis"], f["data"]["yaxis"]) for f in source["frames"]]
     print("Already in frames format. No conversion needed.")
     print(f"Input: {INPUT_PATH}")
     print(f"Frames: {len(frames)}")
