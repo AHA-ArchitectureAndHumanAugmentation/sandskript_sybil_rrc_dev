@@ -40,8 +40,8 @@ if BASE_NAME == "path":
 OUTPUT_DIR = PROJECT_ROOT / "data" / "compas"
 OUTPUT_PATH = OUTPUT_DIR / f"{BASE_NAME}_compas.json"
 
-COORDINATE_SCALE = 1000.0   # metres -> millimetres (current test data)
-# COORDINATE_SCALE = 1.0    # uncomment this line (and comment the one above) once Lin sends millimetres directly
+# COORDINATE_SCALE = 1000.0   # metres -> millimetres (current test data)
+COORDINATE_SCALE = 1.0    # uncomment this line (and comment the one above) 
 
 
 def new_guid() -> str:

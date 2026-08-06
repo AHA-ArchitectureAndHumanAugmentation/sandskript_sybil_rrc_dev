@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 
 # Change this line to select which file goes through the whole pipeline.
-INPUT_PATH = ROOT / "data" / "in" / "2026-07-28_14-35-32" / "path.json"
+INPUT_PATH = ROOT / "data" / "in" / "2026-08-05_15-51-27" / "path.json"
 
 BASE_NAME = INPUT_PATH.stem
 if BASE_NAME == "path":
