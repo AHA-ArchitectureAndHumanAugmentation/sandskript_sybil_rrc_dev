@@ -28,20 +28,20 @@ MODE = "preview"
 # "radial" -- keep each frame's own per-point orientation from the tween
 #             (302's output) -- each frame points radially, away from
 #             SPHERE_CENTER, toward the material.
-ORIENTATION_MODE = "radial"
+ORIENTATION_MODE = "fixed"
 
 ############## Constants ##############
 
-HOME_CONFIG = [90.0, 15.0, -150.0, -5.0, -40.0, -215.0]
+HOME_CONFIG = [-89.68, -8.48, -191.38, -0.58, 22.8, -0.25]
 TOOL_NAME = "t_SprayingTool"
-WORK_OBJECT = "wobj_SprayingNet"
+WORK_OBJECT = "wobj0"
 
 SPRAY_OUTPUT = "ABB_Scalable_IO_0_DO1"
 PUMP_OUTPUT = "ABB_Scalable_IO_0_DO2"
 
-HOME_SPEED = 300
-APPROACH_SPEED = 200
-TOOLPATH_SPEED = 200
+HOME_SPEED = 50
+APPROACH_SPEED = 50
+TOOLPATH_SPEED = 50
 
 SAFE_OFFSET = 100.0        # 10cm retreat, toward SPHERE_CENTER (not world Z)
 PUMP_START_DELAY = 2.0

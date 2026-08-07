@@ -32,4 +32,4 @@ DEFAULT_WOBJ_YAXIS = [0.0, 1000.0, 0.0]
 # The safety sphere -- centered on WORLD_ORIGIN, on purpose. Nothing
 # the robot does may cross this boundary.
 SPHERE_CENTER = WORLD_ORIGIN
-SAFETY_RADIUS = 1600.0
+SAFETY_RADIUS = 1500.0
