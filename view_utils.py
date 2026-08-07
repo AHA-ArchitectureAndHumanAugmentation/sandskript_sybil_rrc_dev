@@ -8,7 +8,7 @@ from compas.datastructures import Mesh
 from compas.geometry import Point, Polyline, Sphere
 from compas_viewer import Viewer
 
-from robot_geometry import DEFAULT_WOBJ_ORIGIN
+from fixed_geometry import DEFAULT_WOBJ_ORIGIN
 
 VIEW_MODE = "perspective"
 
@@ -38,7 +38,7 @@ COLOR_BEFORE = Color(0.88, 0.88, 0.86)          # soft warm grey
 COLOR_AFTER = Color(0.15, 0.15, 0.18)           # near-charcoal
 COLOR_START = Color(0.40, 0.78, 0.62)           # soft teal-green
 COLOR_END = Color(0.85, 0.40, 0.40)             # soft coral-red
-COLOR_ORIGIN = Color(0.95, 0.65, 0.25)          # warm amber
+COLOR_ORIGIN = Color(0.95, 0.65, 0.25)          # warm amber -- robot / world object origin
 COLOR_SURFACE = Color(0.75, 0.75, 0.78)         # neutral grey -- the physical spray surface
 
 
@@ -58,6 +58,8 @@ def show_comparison(
     show_normals=SHOW_NORMALS,
     show_surface=SHOW_SURFACE,
 ):
+    print(f"World origin (mm): ({DEFAULT_WOBJ_ORIGIN.x:.1f}, {DEFAULT_WOBJ_ORIGIN.y:.1f}, {DEFAULT_WOBJ_ORIGIN.z:.1f})")
+
     before_points = [f.point for f in before_frames]
     after_points = [f.point for f in after_frames]
 

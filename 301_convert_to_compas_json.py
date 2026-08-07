@@ -22,7 +22,7 @@ from typing import Any, Iterable
 from compas.data import json_load
 from compas.geometry import Frame
 
-from robot_geometry import DEFAULT_WOBJ_ORIGIN, DEFAULT_WOBJ_XAXIS, DEFAULT_WOBJ_YAXIS
+from fixed_geometry import DEFAULT_WOBJ_ORIGIN, DEFAULT_WOBJ_XAXIS, DEFAULT_WOBJ_YAXIS
 from view_utils import show_comparison
 
 PROJECT_ROOT = Path(__file__).resolve().parent

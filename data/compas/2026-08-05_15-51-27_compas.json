@@ -20,7 +20,7 @@
                         0.0
                     ]
                 },
-                "guid": "7955d418-a579-4587-b61b-5f5058f0c563"
+                "guid": "99eb38d1-9031-4b01-a89e-68d30a16949c"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -41,7 +41,7 @@
                         0.0
                     ]
                 },
-                "guid": "4de2ae76-e3d2-4ae0-968d-a3a2d1c726a0"
+                "guid": "c276e681-c881-4d8b-83e7-fe408672a434"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -62,7 +62,7 @@
                         0.0
                     ]
                 },
-                "guid": "588ae78e-e071-4aca-951c-e485fc904765"
+                "guid": "f5849e0a-9cd4-40d2-be2a-15705ed8c801"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -83,7 +83,7 @@
                         0.0
                     ]
                 },
-                "guid": "9bde4168-fe09-41c5-9f83-2718fa6460fb"
+                "guid": "f409ee04-8ffd-45e6-af28-5bea45957e90"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -104,7 +104,7 @@
                         0.0
                     ]
                 },
-                "guid": "3ce93ff4-cfe5-4dbd-baa4-479f89ac8253"
+                "guid": "83b0dc45-237c-4dcb-a57a-90139ba9d119"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -125,7 +125,7 @@
                         0.0
                     ]
                 },
-                "guid": "a593a673-2f9f-4737-b794-00bc5a7db9ef"
+                "guid": "c8db37ec-be14-47b6-9819-d429349d3e2b"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -146,7 +146,7 @@
                         0.0
                     ]
                 },
-                "guid": "1a4d97fb-6f6a-451a-b2e5-722d24c0d0d5"
+                "guid": "6476c641-c197-4ce1-bd4f-1ba49d74a2cb"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -167,7 +167,7 @@
                         0.0
                     ]
                 },
-                "guid": "9d783652-026b-4cc3-8f86-bf720311ec1d"
+                "guid": "2b3f75d2-f5fb-403c-a8a4-4aadb1fecc3a"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -188,7 +188,7 @@
                         0.0
                     ]
                 },
-                "guid": "6612f106-722c-4445-9f0a-0889a5bca431"
+                "guid": "4957bf10-781d-456b-867c-6497ce9467d4"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -209,7 +209,7 @@
                         0.0
                     ]
                 },
-                "guid": "d5c63e21-8273-46ea-a60d-70141a7df306"
+                "guid": "109e1061-6cf3-489c-a666-086226e2e346"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -230,7 +230,7 @@
                         0.0
                     ]
                 },
-                "guid": "320efe42-19f7-4edc-92f9-7c9eae3a0119"
+                "guid": "03670740-c15e-4cd0-b67a-d2ae321a3cf9"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -251,7 +251,7 @@
                         0.0
                     ]
                 },
-                "guid": "ab0c0723-53c4-4f1b-9fba-5a3a69dcb1d5"
+                "guid": "a8b28cf6-0b2b-4764-b71e-5a2f7f1a1d8d"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -272,7 +272,7 @@
                         0.0
                     ]
                 },
-                "guid": "c97126a2-1c78-48f1-8574-d320d35ef320"
+                "guid": "c1ab97c4-c441-4787-9656-cfafc786b8f9"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -293,7 +293,7 @@
                         0.0
                     ]
                 },
-                "guid": "256816ad-9d4e-4dfd-9d49-98f1c6389003"
+                "guid": "cf719e9c-5f4f-4512-a649-c00673406da1"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -314,7 +314,7 @@
                         0.0
                     ]
                 },
-                "guid": "469670ed-1432-4812-a6eb-e5a32a0fc5c4"
+                "guid": "3a2932f7-bc3c-4bfe-9600-ba760bf283a5"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -335,7 +335,7 @@
                         0.0
                     ]
                 },
-                "guid": "fe3b1b0d-ee7c-4a3a-b74b-9e58e62540c5"
+                "guid": "6af72ad9-9578-4640-81fc-5ec3577a8767"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -356,7 +356,7 @@
                         0.0
                     ]
                 },
-                "guid": "f0eebf1f-0cdd-4043-a806-039c670a211d"
+                "guid": "edb79de3-1a1a-403e-9700-64220bae3d56"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -377,7 +377,7 @@
                         0.0
                     ]
                 },
-                "guid": "528b38d9-8079-403e-a3b0-b3d81899c893"
+                "guid": "4fa684dd-31fb-4006-b693-1109227258c9"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -398,7 +398,7 @@
                         0.0
                     ]
                 },
-                "guid": "abdb33d3-daf1-40e2-abb5-d72058498ccc"
+                "guid": "d31ecbd5-ba60-4d99-84c3-23c040d3733e"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -419,7 +419,7 @@
                         0.0
                     ]
                 },
-                "guid": "85daa163-7ea3-4ebd-bff4-b36d38de2e51"
+                "guid": "16e835c8-1d86-4759-9256-4f28e530af8d"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -440,7 +440,7 @@
                         0.0
                     ]
                 },
-                "guid": "c277212f-2f9d-486d-a983-32eef5732cb2"
+                "guid": "75c74c69-268c-4794-baf5-cef4bd2bd747"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -461,7 +461,7 @@
                         0.0
                     ]
                 },
-                "guid": "926cca32-9ea1-49b3-81f3-c526dd6fabf9"
+                "guid": "c74e446a-2404-4097-92b7-7329ca825f62"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -482,7 +482,7 @@
                         0.0
                     ]
                 },
-                "guid": "489679ce-e742-41fa-b6a4-b4dd3eba066f"
+                "guid": "afd3d890-725b-4225-9d69-5fa4d2cce9a8"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -503,7 +503,7 @@
                         0.0
                     ]
                 },
-                "guid": "f52dba9a-7d0d-4723-a0e1-06dd35e80541"
+                "guid": "2f48f2b5-e43c-4148-b2ea-5b6cb40920dd"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -524,7 +524,7 @@
                         0.0
                     ]
                 },
-                "guid": "588c1c5d-e125-4186-8082-a24e3a769503"
+                "guid": "9f6c38f9-1f8c-4258-b5df-6b4b197ca478"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -545,7 +545,7 @@
                         0.0
                     ]
                 },
-                "guid": "b38276f9-dc9d-4814-8168-50aa22b5f1a3"
+                "guid": "b6a06d70-f635-4cc2-9230-a33a77effbe8"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -566,7 +566,7 @@
                         0.0
                     ]
                 },
-                "guid": "14b34985-fef6-44f2-9d06-2a89b9489a71"
+                "guid": "a6558190-327d-4a3d-84ac-b85e0eee390c"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -587,7 +587,7 @@
                         0.0
                     ]
                 },
-                "guid": "676c041e-18a5-424a-902c-b679cfa9caa4"
+                "guid": "a71a6e63-d247-4269-959d-5727158129c1"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -608,7 +608,7 @@
                         0.0
                     ]
                 },
-                "guid": "232cb084-1489-4faa-86a3-17ad6228d4e3"
+                "guid": "85bf06f0-a599-42eb-b2fa-240c55a2b136"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -629,7 +629,7 @@
                         0.0
                     ]
                 },
-                "guid": "d357948f-19e1-43d8-9779-bbbcc7431d1d"
+                "guid": "b6a66f05-ee51-4667-b326-f12ef162da79"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -650,7 +650,7 @@
                         0.0
                     ]
                 },
-                "guid": "1a6a2c70-567f-40d1-a8ed-d6a2a221f283"
+                "guid": "c9844c60-147e-4d9e-a7d4-f6318dcf68ba"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -671,7 +671,7 @@
                         0.0
                     ]
                 },
-                "guid": "019cc7ce-fbe4-49b0-901e-3411d97bf743"
+                "guid": "86519512-3bf3-46a2-9bc9-63b1f693c0d5"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -692,7 +692,7 @@
                         0.0
                     ]
                 },
-                "guid": "1cc2ad16-ef60-4866-b5e6-4b18f8ddb2bd"
+                "guid": "3eaa76eb-5e1d-42ce-aca1-4c8615ee419c"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -713,7 +713,7 @@
                         0.0
                     ]
                 },
-                "guid": "57d55717-0ef9-41a6-8c56-addd6fe36211"
+                "guid": "4603be49-987e-426c-84bf-b6bf8b40f01c"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -734,7 +734,7 @@
                         0.0
                     ]
                 },
-                "guid": "6d5ca43f-6afc-4132-ad10-01836ae5e779"
+                "guid": "e6c9d91c-2344-41ba-81b6-664780f0a0ea"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -755,7 +755,7 @@
                         0.0
                     ]
                 },
-                "guid": "762d1fb6-0bb3-4966-ab79-0965cc308803"
+                "guid": "bf646114-cd57-4150-9175-88d223e4359d"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -776,7 +776,7 @@
                         0.0
                     ]
                 },
-                "guid": "cc679779-7d8c-4336-b9f7-ea3fc0896964"
+                "guid": "d4547691-c0b7-4abe-8b4c-bd3eabda1dd4"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -797,7 +797,7 @@
                         0.0
                     ]
                 },
-                "guid": "31857600-d58d-4cfa-824e-5de9e74e76c4"
+                "guid": "55906b47-3a29-4df7-95e8-591b17a0daeb"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -818,7 +818,7 @@
                         0.0
                     ]
                 },
-                "guid": "61af4536-78d8-49d8-8667-533ecdf2884b"
+                "guid": "3badcaf2-6ed7-4f6b-a0fb-0e8757dc78bf"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -839,7 +839,7 @@
                         0.0
                     ]
                 },
-                "guid": "0cec90cf-58ed-4877-976e-43de0cac7960"
+                "guid": "499b3f11-0080-4ff8-a447-b95eecbaf9b2"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -860,7 +860,7 @@
                         0.0
                     ]
                 },
-                "guid": "1bbe2ac7-ea4c-4ee5-818d-294df9854795"
+                "guid": "5ea8df7d-1079-4716-9dff-388b00052f95"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -881,7 +881,7 @@
                         0.0
                     ]
                 },
-                "guid": "1178d315-9873-4323-a019-748bda02b3db"
+                "guid": "a5e75fd0-bcfe-4cbc-b0f6-207be2208c72"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -902,7 +902,7 @@
                         0.0
                     ]
                 },
-                "guid": "74ac0ab2-6ebe-468d-b1e7-f58bf74e879b"
+                "guid": "635b119c-3da6-4e91-a2ab-9aef6393a249"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -923,7 +923,7 @@
                         0.0
                     ]
                 },
-                "guid": "6d2d8703-04ec-4d97-8dbf-a4f12b4dd0df"
+                "guid": "958ae94a-893e-4a7e-b016-bf497bc06857"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -944,7 +944,7 @@
                         0.0
                     ]
                 },
-                "guid": "95f115a0-629a-490e-b54c-312b40865e00"
+                "guid": "81258855-1411-4aeb-901e-8992095a5350"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -965,7 +965,7 @@
                         0.0
                     ]
                 },
-                "guid": "db230b5d-4c74-4373-b1f2-e055739ebd30"
+                "guid": "0f8f9b41-cc01-487c-9cff-89c1134e8fa7"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -986,7 +986,7 @@
                         0.0
                     ]
                 },
-                "guid": "5d18026e-dd79-48fe-be31-ccc750cdea4e"
+                "guid": "c57d4980-bf87-4b2c-8c12-8adaa97be9b8"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1007,7 +1007,7 @@
                         0.0
                     ]
                 },
-                "guid": "d8719783-529b-4901-ac82-695a908daf9e"
+                "guid": "5c280cc3-5104-4ef2-aa81-a6983a464a02"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1028,7 +1028,7 @@
                         0.0
                     ]
                 },
-                "guid": "551e1b7b-d002-4d58-948e-24627daf137d"
+                "guid": "2a02f9c0-d387-4d20-a26e-6e79476d7cb2"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1049,7 +1049,7 @@
                         0.0
                     ]
                 },
-                "guid": "b8b26eaf-e38a-4b7c-b45d-db1a768ee57a"
+                "guid": "869862e5-43d9-4348-a722-2d8077e61fc5"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1070,7 +1070,7 @@
                         0.0
                     ]
                 },
-                "guid": "ae05c9ad-a94a-4332-ab4b-64519de0aaa0"
+                "guid": "6ee02f19-0248-4335-bdd0-d4fc28f3ec44"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1091,7 +1091,7 @@
                         0.0
                     ]
                 },
-                "guid": "21645074-0dd3-439d-a93f-7720642db425"
+                "guid": "e4ffe864-817d-4840-bcce-4d0d2fb800bb"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1112,7 +1112,7 @@
                         0.0
                     ]
                 },
-                "guid": "ee0c5944-a243-48a0-9ac6-c9178389b08f"
+                "guid": "d2d18e30-7a64-4085-9db4-ab254e4d947c"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1133,7 +1133,7 @@
                         0.0
                     ]
                 },
-                "guid": "7a6ffc53-2d6a-4a51-ab26-7484f1a1ccfb"
+                "guid": "e8c79b8e-029f-4b61-a3a2-d461ad9d3f3f"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1154,7 +1154,7 @@
                         0.0
                     ]
                 },
-                "guid": "1aad68da-dd35-4609-9edd-37c757a91021"
+                "guid": "3949db41-e2b1-409f-9310-d58b3438f315"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1175,7 +1175,7 @@
                         0.0
                     ]
                 },
-                "guid": "5776d3d8-0d87-44e0-94f4-7e6d56129700"
+                "guid": "da20a991-52d6-4aa5-ac73-bc85a82536f4"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1196,7 +1196,7 @@
                         0.0
                     ]
                 },
-                "guid": "fa8eca4d-6314-4f3b-8d62-850e0be8d44c"
+                "guid": "5ebfa345-47ad-48b1-b61a-321c961fb499"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1217,7 +1217,7 @@
                         0.0
                     ]
                 },
-                "guid": "55f4be27-f684-482d-aba5-e43688c9191c"
+                "guid": "ad8debd3-a562-4a93-9a7e-04d9bd74b96a"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1238,7 +1238,7 @@
                         0.0
                     ]
                 },
-                "guid": "107a71cc-f6e1-492d-b6b7-7449d0fd63e7"
+                "guid": "df56ca3c-b1c2-4cc3-a2f4-b1e9ed98944f"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1259,7 +1259,7 @@
                         0.0
                     ]
                 },
-                "guid": "7222a7bc-4064-4a14-8f96-bc68e4764fcc"
+                "guid": "b9f9f755-85fd-4b33-a7f0-e1794a8a2281"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1280,7 +1280,7 @@
                         0.0
                     ]
                 },
-                "guid": "504d377c-7cbf-4ca7-8ca7-1530ca89d0f2"
+                "guid": "dc680723-6db6-44a8-aef3-c025cd82a9f2"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1301,7 +1301,7 @@
                         0.0
                     ]
                 },
-                "guid": "48501708-1789-4989-a6b4-005648e5b702"
+                "guid": "4e74a613-07c6-418e-81ac-9a1b2a9ea6fb"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1322,7 +1322,7 @@
                         0.0
                     ]
                 },
-                "guid": "b5a99ca8-fc45-4dd2-b93f-9d2021997d33"
+                "guid": "daf90e7b-dc8e-4dd2-9374-6697c0fb96ca"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1343,7 +1343,7 @@
                         0.0
                     ]
                 },
-                "guid": "001910e8-782b-4ba3-9a51-f497bee878a9"
+                "guid": "ac7d1e89-a1ab-44d5-9fe8-428517f0fa05"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1364,7 +1364,7 @@
                         0.0
                     ]
                 },
-                "guid": "72bdfb76-eeb8-4414-bc6d-d1321c2e66b2"
+                "guid": "fe1bfd4b-b11e-4320-baeb-a52bb032b479"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1385,7 +1385,7 @@
                         0.0
                     ]
                 },
-                "guid": "96fe14a7-f997-45bf-a4f8-6b63c1ebcb8f"
+                "guid": "b37d5aec-4c61-47af-a1d2-79870783bdf5"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1406,7 +1406,7 @@
                         0.0
                     ]
                 },
-                "guid": "da424080-e468-4d48-b528-20d583aabc98"
+                "guid": "928261d4-64a2-4940-af29-3fa77c20c99d"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1427,7 +1427,7 @@
                         0.0
                     ]
                 },
-                "guid": "fde874c0-9271-4454-98bc-bf0ea248a142"
+                "guid": "9867a6c3-4477-4f5e-97f3-e8e9475da0ea"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1448,7 +1448,7 @@
                         0.0
                     ]
                 },
-                "guid": "e2342dc8-a237-4e3d-90a5-b39f7acba084"
+                "guid": "83a57ca9-c159-4a6f-9ffb-feab054d7582"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1469,7 +1469,7 @@
                         0.0
                     ]
                 },
-                "guid": "0488d3e4-9c5d-42d0-b1cf-874117285bed"
+                "guid": "7519e0c3-0cd0-4577-9c65-b8480d18fe60"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1490,7 +1490,7 @@
                         0.0
                     ]
                 },
-                "guid": "9a164f44-1eb9-4237-9273-2ec55f7a8792"
+                "guid": "a4eb0de4-7d83-4359-8617-b65072c82bc0"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1511,7 +1511,7 @@
                         0.0
                     ]
                 },
-                "guid": "5ee2ffbd-5e77-419c-abc9-803f9ff56f0d"
+                "guid": "5969640d-d42f-47b3-942a-5e3cf301cdba"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1532,7 +1532,7 @@
                         0.0
                     ]
                 },
-                "guid": "ace7a4dc-289f-44f4-8b1e-daf064adbd2d"
+                "guid": "ce0612d4-92b2-409a-952f-23f1b0cf2a5d"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1553,7 +1553,7 @@
                         0.0
                     ]
                 },
-                "guid": "3de1143f-2498-4693-a99a-cae6ca759c41"
+                "guid": "8dab3f4d-c9d1-4b27-9655-3793c913df10"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1574,7 +1574,7 @@
                         0.0
                     ]
                 },
-                "guid": "54c7855d-be57-4b92-abfd-830b6e295b5b"
+                "guid": "ad769967-27ee-4bef-ab17-1fafe68d30bf"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1595,7 +1595,7 @@
                         0.0
                     ]
                 },
-                "guid": "ecce1237-3a03-42e0-b422-092fb864e3a9"
+                "guid": "74a3c9b7-a330-46c6-8a75-3a97df0f1a6e"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1616,7 +1616,7 @@
                         0.0
                     ]
                 },
-                "guid": "c1045692-9577-46aa-9c11-93964f61a40b"
+                "guid": "6749da1d-81c9-49c9-8b3a-d88e20563cb9"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1637,7 +1637,7 @@
                         0.0
                     ]
                 },
-                "guid": "614fa0cc-002b-47b9-9224-c6c28b877e08"
+                "guid": "21c50a39-b8aa-43a7-b85d-1085807df0aa"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1658,7 +1658,7 @@
                         0.0
                     ]
                 },
-                "guid": "e4e04e4a-4039-4ce3-bce1-0faeefccfc21"
+                "guid": "fb3d70b7-312a-48b7-a007-b5d5bd3ad751"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1679,7 +1679,7 @@
                         0.0
                     ]
                 },
-                "guid": "e7a7ed24-5802-4f0d-964e-f560c4e98075"
+                "guid": "43a1d674-2ccb-4119-955e-fb253d8204dc"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1700,7 +1700,7 @@
                         0.0
                     ]
                 },
-                "guid": "1e5fe132-7c88-4d07-9298-62e9acdb69f6"
+                "guid": "c13f78e2-b3a3-45d8-9eea-3f13d4c804b2"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1721,7 +1721,7 @@
                         0.0
                     ]
                 },
-                "guid": "5660900b-7866-4426-9308-cad063b873d9"
+                "guid": "44e6fe8e-3796-41c3-b2c2-ca4786bdde94"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1742,7 +1742,7 @@
                         0.0
                     ]
                 },
-                "guid": "b839b934-e49e-4825-a98e-5f6650462b0f"
+                "guid": "5757a8da-1abe-47d7-b74e-1c954c6d08a8"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1763,7 +1763,7 @@
                         0.0
                     ]
                 },
-                "guid": "5792d0c6-61f9-4bf8-80b4-c70c1411ce37"
+                "guid": "3b324e65-1ce4-4a0b-a668-14396feecac8"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1784,7 +1784,7 @@
                         0.0
                     ]
                 },
-                "guid": "258db4d1-dee7-49f5-af95-633f97f2b75f"
+                "guid": "d2437006-cc18-4380-9cb3-3ccbd4df4b5e"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1805,7 +1805,7 @@
                         0.0
                     ]
                 },
-                "guid": "7f4bcf9f-739d-40b4-a0df-f3c87be2b95b"
+                "guid": "8f4c5e18-c263-4902-a9fd-933922df6bc7"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1826,7 +1826,7 @@
                         0.0
                     ]
                 },
-                "guid": "4b440f83-5dfc-4fa2-a914-5ffdc97d71bf"
+                "guid": "cc2d0859-4561-41e1-b8d2-10d7ed04eb49"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1847,7 +1847,7 @@
                         0.0
                     ]
                 },
-                "guid": "597e5d16-31b7-4643-a460-bb9a7ed0dc0f"
+                "guid": "27475d1b-096b-4b00-8697-e567d5a0becc"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1868,7 +1868,7 @@
                         0.0
                     ]
                 },
-                "guid": "89bb4e27-a880-4b35-a899-37fb4ce83021"
+                "guid": "40bc3263-5b90-427d-9440-6945467031cc"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1889,7 +1889,7 @@
                         0.0
                     ]
                 },
-                "guid": "13a3281e-5ecb-47f1-801e-65609773c930"
+                "guid": "5bf35764-42d1-423b-af1b-4b1d9cd4d79d"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1910,7 +1910,7 @@
                         0.0
                     ]
                 },
-                "guid": "0f467b62-1429-4827-b884-3c353868cf23"
+                "guid": "60b52694-c03c-4f32-bc0c-638e33954764"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1931,7 +1931,7 @@
                         0.0
                     ]
                 },
-                "guid": "04eb57b4-6ce7-4568-b013-8e41b824bd65"
+                "guid": "53ad0ace-e725-49ce-be1b-d0a98a23839a"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1952,7 +1952,7 @@
                         0.0
                     ]
                 },
-                "guid": "4f59d181-8fb6-49c2-ba40-d6ef6519fee0"
+                "guid": "39990ea1-d145-407b-ac14-2a7d05825cfb"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1973,7 +1973,7 @@
                         0.0
                     ]
                 },
-                "guid": "77d08ace-50c1-4e5f-8035-b157b9b11a65"
+                "guid": "67994b8c-63c2-4041-8f5e-e9182ea20991"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -1994,7 +1994,7 @@
                         0.0
                     ]
                 },
-                "guid": "0bcb4b89-f085-432d-8d5d-0b4ca33980f5"
+                "guid": "8313c2a0-71e8-4d2f-a35f-7ebf3ac57c1b"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -2015,7 +2015,7 @@
                         0.0
                     ]
                 },
-                "guid": "4cdaef5e-7261-46a5-99e7-aaee24c2aeea"
+                "guid": "a07afdba-f10e-44ba-b625-f796a4ab72b5"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -2036,7 +2036,7 @@
                         0.0
                     ]
                 },
-                "guid": "dd478429-0d4c-4c36-a239-ab2a27a8cf5f"
+                "guid": "24f2b37f-dcc1-4ffb-9d4e-0dfd6fe284e4"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -2057,7 +2057,7 @@
                         0.0
                     ]
                 },
-                "guid": "1bec56e3-317d-411e-bcd6-9222e03bf7c2"
+                "guid": "308ae070-e9f7-4337-8995-dc4de61f4fb8"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -2078,7 +2078,7 @@
                         0.0
                     ]
                 },
-                "guid": "f9d3fbc5-db5a-4535-90e9-d32050dcd506"
+                "guid": "f178ad77-00cf-4888-bc4d-66a20af528e8"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -2099,7 +2099,7 @@
                         0.0
                     ]
                 },
-                "guid": "f5ba9841-7711-41fe-a15f-9911817e6d0e"
+                "guid": "316d719d-af4f-462e-81f1-319f613d12f2"
             },
             {
                 "dtype": "compas.geometry/Frame",
@@ -2120,7 +2120,7 @@
                         0.0
                     ]
                 },
-                "guid": "dbe78375-8167-45ca-b783-61d03c136768"
+                "guid": "4e4d5293-cdb9-4ede-bd30-d07ee1aae793"
             }
         ]
     ],
@@ -2144,7 +2144,7 @@
                     0.0
                 ]
             },
-            "guid": "7955d418-a579-4587-b61b-5f5058f0c563"
+            "guid": "99eb38d1-9031-4b01-a89e-68d30a16949c"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2165,7 +2165,7 @@
                     0.0
                 ]
             },
-            "guid": "4de2ae76-e3d2-4ae0-968d-a3a2d1c726a0"
+            "guid": "c276e681-c881-4d8b-83e7-fe408672a434"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2186,7 +2186,7 @@
                     0.0
                 ]
             },
-            "guid": "588ae78e-e071-4aca-951c-e485fc904765"
+            "guid": "f5849e0a-9cd4-40d2-be2a-15705ed8c801"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2207,7 +2207,7 @@
                     0.0
                 ]
             },
-            "guid": "9bde4168-fe09-41c5-9f83-2718fa6460fb"
+            "guid": "f409ee04-8ffd-45e6-af28-5bea45957e90"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2228,7 +2228,7 @@
                     0.0
                 ]
             },
-            "guid": "3ce93ff4-cfe5-4dbd-baa4-479f89ac8253"
+            "guid": "83b0dc45-237c-4dcb-a57a-90139ba9d119"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2249,7 +2249,7 @@
                     0.0
                 ]
             },
-            "guid": "a593a673-2f9f-4737-b794-00bc5a7db9ef"
+            "guid": "c8db37ec-be14-47b6-9819-d429349d3e2b"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2270,7 +2270,7 @@
                     0.0
                 ]
             },
-            "guid": "1a4d97fb-6f6a-451a-b2e5-722d24c0d0d5"
+            "guid": "6476c641-c197-4ce1-bd4f-1ba49d74a2cb"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2291,7 +2291,7 @@
                     0.0
                 ]
             },
-            "guid": "9d783652-026b-4cc3-8f86-bf720311ec1d"
+            "guid": "2b3f75d2-f5fb-403c-a8a4-4aadb1fecc3a"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2312,7 +2312,7 @@
                     0.0
                 ]
             },
-            "guid": "6612f106-722c-4445-9f0a-0889a5bca431"
+            "guid": "4957bf10-781d-456b-867c-6497ce9467d4"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2333,7 +2333,7 @@
                     0.0
                 ]
             },
-            "guid": "d5c63e21-8273-46ea-a60d-70141a7df306"
+            "guid": "109e1061-6cf3-489c-a666-086226e2e346"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2354,7 +2354,7 @@
                     0.0
                 ]
             },
-            "guid": "320efe42-19f7-4edc-92f9-7c9eae3a0119"
+            "guid": "03670740-c15e-4cd0-b67a-d2ae321a3cf9"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2375,7 +2375,7 @@
                     0.0
                 ]
             },
-            "guid": "ab0c0723-53c4-4f1b-9fba-5a3a69dcb1d5"
+            "guid": "a8b28cf6-0b2b-4764-b71e-5a2f7f1a1d8d"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2396,7 +2396,7 @@
                     0.0
                 ]
             },
-            "guid": "c97126a2-1c78-48f1-8574-d320d35ef320"
+            "guid": "c1ab97c4-c441-4787-9656-cfafc786b8f9"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2417,7 +2417,7 @@
                     0.0
                 ]
             },
-            "guid": "256816ad-9d4e-4dfd-9d49-98f1c6389003"
+            "guid": "cf719e9c-5f4f-4512-a649-c00673406da1"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2438,7 +2438,7 @@
                     0.0
                 ]
             },
-            "guid": "469670ed-1432-4812-a6eb-e5a32a0fc5c4"
+            "guid": "3a2932f7-bc3c-4bfe-9600-ba760bf283a5"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2459,7 +2459,7 @@
                     0.0
                 ]
             },
-            "guid": "fe3b1b0d-ee7c-4a3a-b74b-9e58e62540c5"
+            "guid": "6af72ad9-9578-4640-81fc-5ec3577a8767"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2480,7 +2480,7 @@
                     0.0
                 ]
             },
-            "guid": "f0eebf1f-0cdd-4043-a806-039c670a211d"
+            "guid": "edb79de3-1a1a-403e-9700-64220bae3d56"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2501,7 +2501,7 @@
                     0.0
                 ]
             },
-            "guid": "528b38d9-8079-403e-a3b0-b3d81899c893"
+            "guid": "4fa684dd-31fb-4006-b693-1109227258c9"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2522,7 +2522,7 @@
                     0.0
                 ]
             },
-            "guid": "abdb33d3-daf1-40e2-abb5-d72058498ccc"
+            "guid": "d31ecbd5-ba60-4d99-84c3-23c040d3733e"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2543,7 +2543,7 @@
                     0.0
                 ]
             },
-            "guid": "85daa163-7ea3-4ebd-bff4-b36d38de2e51"
+            "guid": "16e835c8-1d86-4759-9256-4f28e530af8d"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2564,7 +2564,7 @@
                     0.0
                 ]
             },
-            "guid": "c277212f-2f9d-486d-a983-32eef5732cb2"
+            "guid": "75c74c69-268c-4794-baf5-cef4bd2bd747"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2585,7 +2585,7 @@
                     0.0
                 ]
             },
-            "guid": "926cca32-9ea1-49b3-81f3-c526dd6fabf9"
+            "guid": "c74e446a-2404-4097-92b7-7329ca825f62"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2606,7 +2606,7 @@
                     0.0
                 ]
             },
-            "guid": "489679ce-e742-41fa-b6a4-b4dd3eba066f"
+            "guid": "afd3d890-725b-4225-9d69-5fa4d2cce9a8"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2627,7 +2627,7 @@
                     0.0
                 ]
             },
-            "guid": "f52dba9a-7d0d-4723-a0e1-06dd35e80541"
+            "guid": "2f48f2b5-e43c-4148-b2ea-5b6cb40920dd"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2648,7 +2648,7 @@
                     0.0
                 ]
             },
-            "guid": "588c1c5d-e125-4186-8082-a24e3a769503"
+            "guid": "9f6c38f9-1f8c-4258-b5df-6b4b197ca478"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2669,7 +2669,7 @@
                     0.0
                 ]
             },
-            "guid": "b38276f9-dc9d-4814-8168-50aa22b5f1a3"
+            "guid": "b6a06d70-f635-4cc2-9230-a33a77effbe8"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2690,7 +2690,7 @@
                     0.0
                 ]
             },
-            "guid": "14b34985-fef6-44f2-9d06-2a89b9489a71"
+            "guid": "a6558190-327d-4a3d-84ac-b85e0eee390c"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2711,7 +2711,7 @@
                     0.0
                 ]
             },
-            "guid": "676c041e-18a5-424a-902c-b679cfa9caa4"
+            "guid": "a71a6e63-d247-4269-959d-5727158129c1"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2732,7 +2732,7 @@
                     0.0
                 ]
             },
-            "guid": "232cb084-1489-4faa-86a3-17ad6228d4e3"
+            "guid": "85bf06f0-a599-42eb-b2fa-240c55a2b136"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2753,7 +2753,7 @@
                     0.0
                 ]
             },
-            "guid": "d357948f-19e1-43d8-9779-bbbcc7431d1d"
+            "guid": "b6a66f05-ee51-4667-b326-f12ef162da79"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2774,7 +2774,7 @@
                     0.0
                 ]
             },
-            "guid": "1a6a2c70-567f-40d1-a8ed-d6a2a221f283"
+            "guid": "c9844c60-147e-4d9e-a7d4-f6318dcf68ba"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2795,7 +2795,7 @@
                     0.0
                 ]
             },
-            "guid": "019cc7ce-fbe4-49b0-901e-3411d97bf743"
+            "guid": "86519512-3bf3-46a2-9bc9-63b1f693c0d5"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2816,7 +2816,7 @@
                     0.0
                 ]
             },
-            "guid": "1cc2ad16-ef60-4866-b5e6-4b18f8ddb2bd"
+            "guid": "3eaa76eb-5e1d-42ce-aca1-4c8615ee419c"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2837,7 +2837,7 @@
                     0.0
                 ]
             },
-            "guid": "57d55717-0ef9-41a6-8c56-addd6fe36211"
+            "guid": "4603be49-987e-426c-84bf-b6bf8b40f01c"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2858,7 +2858,7 @@
                     0.0
                 ]
             },
-            "guid": "6d5ca43f-6afc-4132-ad10-01836ae5e779"
+            "guid": "e6c9d91c-2344-41ba-81b6-664780f0a0ea"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2879,7 +2879,7 @@
                     0.0
                 ]
             },
-            "guid": "762d1fb6-0bb3-4966-ab79-0965cc308803"
+            "guid": "bf646114-cd57-4150-9175-88d223e4359d"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2900,7 +2900,7 @@
                     0.0
                 ]
             },
-            "guid": "cc679779-7d8c-4336-b9f7-ea3fc0896964"
+            "guid": "d4547691-c0b7-4abe-8b4c-bd3eabda1dd4"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2921,7 +2921,7 @@
                     0.0
                 ]
             },
-            "guid": "31857600-d58d-4cfa-824e-5de9e74e76c4"
+            "guid": "55906b47-3a29-4df7-95e8-591b17a0daeb"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2942,7 +2942,7 @@
                     0.0
                 ]
             },
-            "guid": "61af4536-78d8-49d8-8667-533ecdf2884b"
+            "guid": "3badcaf2-6ed7-4f6b-a0fb-0e8757dc78bf"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2963,7 +2963,7 @@
                     0.0
                 ]
             },
-            "guid": "0cec90cf-58ed-4877-976e-43de0cac7960"
+            "guid": "499b3f11-0080-4ff8-a447-b95eecbaf9b2"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -2984,7 +2984,7 @@
                     0.0
                 ]
             },
-            "guid": "1bbe2ac7-ea4c-4ee5-818d-294df9854795"
+            "guid": "5ea8df7d-1079-4716-9dff-388b00052f95"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3005,7 +3005,7 @@
                     0.0
                 ]
             },
-            "guid": "1178d315-9873-4323-a019-748bda02b3db"
+            "guid": "a5e75fd0-bcfe-4cbc-b0f6-207be2208c72"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3026,7 +3026,7 @@
                     0.0
                 ]
             },
-            "guid": "74ac0ab2-6ebe-468d-b1e7-f58bf74e879b"
+            "guid": "635b119c-3da6-4e91-a2ab-9aef6393a249"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3047,7 +3047,7 @@
                     0.0
                 ]
             },
-            "guid": "6d2d8703-04ec-4d97-8dbf-a4f12b4dd0df"
+            "guid": "958ae94a-893e-4a7e-b016-bf497bc06857"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3068,7 +3068,7 @@
                     0.0
                 ]
             },
-            "guid": "95f115a0-629a-490e-b54c-312b40865e00"
+            "guid": "81258855-1411-4aeb-901e-8992095a5350"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3089,7 +3089,7 @@
                     0.0
                 ]
             },
-            "guid": "db230b5d-4c74-4373-b1f2-e055739ebd30"
+            "guid": "0f8f9b41-cc01-487c-9cff-89c1134e8fa7"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3110,7 +3110,7 @@
                     0.0
                 ]
             },
-            "guid": "5d18026e-dd79-48fe-be31-ccc750cdea4e"
+            "guid": "c57d4980-bf87-4b2c-8c12-8adaa97be9b8"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3131,7 +3131,7 @@
                     0.0
                 ]
             },
-            "guid": "d8719783-529b-4901-ac82-695a908daf9e"
+            "guid": "5c280cc3-5104-4ef2-aa81-a6983a464a02"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3152,7 +3152,7 @@
                     0.0
                 ]
             },
-            "guid": "551e1b7b-d002-4d58-948e-24627daf137d"
+            "guid": "2a02f9c0-d387-4d20-a26e-6e79476d7cb2"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3173,7 +3173,7 @@
                     0.0
                 ]
             },
-            "guid": "b8b26eaf-e38a-4b7c-b45d-db1a768ee57a"
+            "guid": "869862e5-43d9-4348-a722-2d8077e61fc5"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3194,7 +3194,7 @@
                     0.0
                 ]
             },
-            "guid": "ae05c9ad-a94a-4332-ab4b-64519de0aaa0"
+            "guid": "6ee02f19-0248-4335-bdd0-d4fc28f3ec44"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3215,7 +3215,7 @@
                     0.0
                 ]
             },
-            "guid": "21645074-0dd3-439d-a93f-7720642db425"
+            "guid": "e4ffe864-817d-4840-bcce-4d0d2fb800bb"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3236,7 +3236,7 @@
                     0.0
                 ]
             },
-            "guid": "ee0c5944-a243-48a0-9ac6-c9178389b08f"
+            "guid": "d2d18e30-7a64-4085-9db4-ab254e4d947c"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3257,7 +3257,7 @@
                     0.0
                 ]
             },
-            "guid": "7a6ffc53-2d6a-4a51-ab26-7484f1a1ccfb"
+            "guid": "e8c79b8e-029f-4b61-a3a2-d461ad9d3f3f"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3278,7 +3278,7 @@
                     0.0
                 ]
             },
-            "guid": "1aad68da-dd35-4609-9edd-37c757a91021"
+            "guid": "3949db41-e2b1-409f-9310-d58b3438f315"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3299,7 +3299,7 @@
                     0.0
                 ]
             },
-            "guid": "5776d3d8-0d87-44e0-94f4-7e6d56129700"
+            "guid": "da20a991-52d6-4aa5-ac73-bc85a82536f4"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3320,7 +3320,7 @@
                     0.0
                 ]
             },
-            "guid": "fa8eca4d-6314-4f3b-8d62-850e0be8d44c"
+            "guid": "5ebfa345-47ad-48b1-b61a-321c961fb499"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3341,7 +3341,7 @@
                     0.0
                 ]
             },
-            "guid": "55f4be27-f684-482d-aba5-e43688c9191c"
+            "guid": "ad8debd3-a562-4a93-9a7e-04d9bd74b96a"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3362,7 +3362,7 @@
                     0.0
                 ]
             },
-            "guid": "107a71cc-f6e1-492d-b6b7-7449d0fd63e7"
+            "guid": "df56ca3c-b1c2-4cc3-a2f4-b1e9ed98944f"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3383,7 +3383,7 @@
                     0.0
                 ]
             },
-            "guid": "7222a7bc-4064-4a14-8f96-bc68e4764fcc"
+            "guid": "b9f9f755-85fd-4b33-a7f0-e1794a8a2281"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3404,7 +3404,7 @@
                     0.0
                 ]
             },
-            "guid": "504d377c-7cbf-4ca7-8ca7-1530ca89d0f2"
+            "guid": "dc680723-6db6-44a8-aef3-c025cd82a9f2"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3425,7 +3425,7 @@
                     0.0
                 ]
             },
-            "guid": "48501708-1789-4989-a6b4-005648e5b702"
+            "guid": "4e74a613-07c6-418e-81ac-9a1b2a9ea6fb"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3446,7 +3446,7 @@
                     0.0
                 ]
             },
-            "guid": "b5a99ca8-fc45-4dd2-b93f-9d2021997d33"
+            "guid": "daf90e7b-dc8e-4dd2-9374-6697c0fb96ca"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3467,7 +3467,7 @@
                     0.0
                 ]
             },
-            "guid": "001910e8-782b-4ba3-9a51-f497bee878a9"
+            "guid": "ac7d1e89-a1ab-44d5-9fe8-428517f0fa05"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3488,7 +3488,7 @@
                     0.0
                 ]
             },
-            "guid": "72bdfb76-eeb8-4414-bc6d-d1321c2e66b2"
+            "guid": "fe1bfd4b-b11e-4320-baeb-a52bb032b479"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3509,7 +3509,7 @@
                     0.0
                 ]
             },
-            "guid": "96fe14a7-f997-45bf-a4f8-6b63c1ebcb8f"
+            "guid": "b37d5aec-4c61-47af-a1d2-79870783bdf5"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3530,7 +3530,7 @@
                     0.0
                 ]
             },
-            "guid": "da424080-e468-4d48-b528-20d583aabc98"
+            "guid": "928261d4-64a2-4940-af29-3fa77c20c99d"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3551,7 +3551,7 @@
                     0.0
                 ]
             },
-            "guid": "fde874c0-9271-4454-98bc-bf0ea248a142"
+            "guid": "9867a6c3-4477-4f5e-97f3-e8e9475da0ea"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3572,7 +3572,7 @@
                     0.0
                 ]
             },
-            "guid": "e2342dc8-a237-4e3d-90a5-b39f7acba084"
+            "guid": "83a57ca9-c159-4a6f-9ffb-feab054d7582"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3593,7 +3593,7 @@
                     0.0
                 ]
             },
-            "guid": "0488d3e4-9c5d-42d0-b1cf-874117285bed"
+            "guid": "7519e0c3-0cd0-4577-9c65-b8480d18fe60"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3614,7 +3614,7 @@
                     0.0
                 ]
             },
-            "guid": "9a164f44-1eb9-4237-9273-2ec55f7a8792"
+            "guid": "a4eb0de4-7d83-4359-8617-b65072c82bc0"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3635,7 +3635,7 @@
                     0.0
                 ]
             },
-            "guid": "5ee2ffbd-5e77-419c-abc9-803f9ff56f0d"
+            "guid": "5969640d-d42f-47b3-942a-5e3cf301cdba"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3656,7 +3656,7 @@
                     0.0
                 ]
             },
-            "guid": "ace7a4dc-289f-44f4-8b1e-daf064adbd2d"
+            "guid": "ce0612d4-92b2-409a-952f-23f1b0cf2a5d"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3677,7 +3677,7 @@
                     0.0
                 ]
             },
-            "guid": "3de1143f-2498-4693-a99a-cae6ca759c41"
+            "guid": "8dab3f4d-c9d1-4b27-9655-3793c913df10"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3698,7 +3698,7 @@
                     0.0
                 ]
             },
-            "guid": "54c7855d-be57-4b92-abfd-830b6e295b5b"
+            "guid": "ad769967-27ee-4bef-ab17-1fafe68d30bf"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3719,7 +3719,7 @@
                     0.0
                 ]
             },
-            "guid": "ecce1237-3a03-42e0-b422-092fb864e3a9"
+            "guid": "74a3c9b7-a330-46c6-8a75-3a97df0f1a6e"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3740,7 +3740,7 @@
                     0.0
                 ]
             },
-            "guid": "c1045692-9577-46aa-9c11-93964f61a40b"
+            "guid": "6749da1d-81c9-49c9-8b3a-d88e20563cb9"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3761,7 +3761,7 @@
                     0.0
                 ]
             },
-            "guid": "614fa0cc-002b-47b9-9224-c6c28b877e08"
+            "guid": "21c50a39-b8aa-43a7-b85d-1085807df0aa"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3782,7 +3782,7 @@
                     0.0
                 ]
             },
-            "guid": "e4e04e4a-4039-4ce3-bce1-0faeefccfc21"
+            "guid": "fb3d70b7-312a-48b7-a007-b5d5bd3ad751"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3803,7 +3803,7 @@
                     0.0
                 ]
             },
-            "guid": "e7a7ed24-5802-4f0d-964e-f560c4e98075"
+            "guid": "43a1d674-2ccb-4119-955e-fb253d8204dc"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3824,7 +3824,7 @@
                     0.0
                 ]
             },
-            "guid": "1e5fe132-7c88-4d07-9298-62e9acdb69f6"
+            "guid": "c13f78e2-b3a3-45d8-9eea-3f13d4c804b2"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3845,7 +3845,7 @@
                     0.0
                 ]
             },
-            "guid": "5660900b-7866-4426-9308-cad063b873d9"
+            "guid": "44e6fe8e-3796-41c3-b2c2-ca4786bdde94"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3866,7 +3866,7 @@
                     0.0
                 ]
             },
-            "guid": "b839b934-e49e-4825-a98e-5f6650462b0f"
+            "guid": "5757a8da-1abe-47d7-b74e-1c954c6d08a8"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3887,7 +3887,7 @@
                     0.0
                 ]
             },
-            "guid": "5792d0c6-61f9-4bf8-80b4-c70c1411ce37"
+            "guid": "3b324e65-1ce4-4a0b-a668-14396feecac8"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3908,7 +3908,7 @@
                     0.0
                 ]
             },
-            "guid": "258db4d1-dee7-49f5-af95-633f97f2b75f"
+            "guid": "d2437006-cc18-4380-9cb3-3ccbd4df4b5e"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3929,7 +3929,7 @@
                     0.0
                 ]
             },
-            "guid": "7f4bcf9f-739d-40b4-a0df-f3c87be2b95b"
+            "guid": "8f4c5e18-c263-4902-a9fd-933922df6bc7"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3950,7 +3950,7 @@
                     0.0
                 ]
             },
-            "guid": "4b440f83-5dfc-4fa2-a914-5ffdc97d71bf"
+            "guid": "cc2d0859-4561-41e1-b8d2-10d7ed04eb49"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3971,7 +3971,7 @@
                     0.0
                 ]
             },
-            "guid": "597e5d16-31b7-4643-a460-bb9a7ed0dc0f"
+            "guid": "27475d1b-096b-4b00-8697-e567d5a0becc"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -3992,7 +3992,7 @@
                     0.0
                 ]
             },
-            "guid": "89bb4e27-a880-4b35-a899-37fb4ce83021"
+            "guid": "40bc3263-5b90-427d-9440-6945467031cc"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4013,7 +4013,7 @@
                     0.0
                 ]
             },
-            "guid": "13a3281e-5ecb-47f1-801e-65609773c930"
+            "guid": "5bf35764-42d1-423b-af1b-4b1d9cd4d79d"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4034,7 +4034,7 @@
                     0.0
                 ]
             },
-            "guid": "0f467b62-1429-4827-b884-3c353868cf23"
+            "guid": "60b52694-c03c-4f32-bc0c-638e33954764"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4055,7 +4055,7 @@
                     0.0
                 ]
             },
-            "guid": "04eb57b4-6ce7-4568-b013-8e41b824bd65"
+            "guid": "53ad0ace-e725-49ce-be1b-d0a98a23839a"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4076,7 +4076,7 @@
                     0.0
                 ]
             },
-            "guid": "4f59d181-8fb6-49c2-ba40-d6ef6519fee0"
+            "guid": "39990ea1-d145-407b-ac14-2a7d05825cfb"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4097,7 +4097,7 @@
                     0.0
                 ]
             },
-            "guid": "77d08ace-50c1-4e5f-8035-b157b9b11a65"
+            "guid": "67994b8c-63c2-4041-8f5e-e9182ea20991"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4118,7 +4118,7 @@
                     0.0
                 ]
             },
-            "guid": "0bcb4b89-f085-432d-8d5d-0b4ca33980f5"
+            "guid": "8313c2a0-71e8-4d2f-a35f-7ebf3ac57c1b"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4139,7 +4139,7 @@
                     0.0
                 ]
             },
-            "guid": "4cdaef5e-7261-46a5-99e7-aaee24c2aeea"
+            "guid": "a07afdba-f10e-44ba-b625-f796a4ab72b5"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4160,7 +4160,7 @@
                     0.0
                 ]
             },
-            "guid": "dd478429-0d4c-4c36-a239-ab2a27a8cf5f"
+            "guid": "24f2b37f-dcc1-4ffb-9d4e-0dfd6fe284e4"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4181,7 +4181,7 @@
                     0.0
                 ]
             },
-            "guid": "1bec56e3-317d-411e-bcd6-9222e03bf7c2"
+            "guid": "308ae070-e9f7-4337-8995-dc4de61f4fb8"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4202,7 +4202,7 @@
                     0.0
                 ]
             },
-            "guid": "f9d3fbc5-db5a-4535-90e9-d32050dcd506"
+            "guid": "f178ad77-00cf-4888-bc4d-66a20af528e8"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4223,7 +4223,7 @@
                     0.0
                 ]
             },
-            "guid": "f5ba9841-7711-41fe-a15f-9911817e6d0e"
+            "guid": "316d719d-af4f-462e-81f1-319f613d12f2"
         },
         {
             "dtype": "compas.geometry/Frame",
@@ -4244,7 +4244,7 @@
                     0.0
                 ]
             },
-            "guid": "dbe78375-8167-45ca-b783-61d03c136768"
+            "guid": "4e4d5293-cdb9-4ede-bd30-d07ee1aae793"
         }
     ],
     "wobj_origin": {
@@ -4254,7 +4254,7 @@
             0.0,
             0.0
         ],
-        "guid": "7c64b19b-0b41-478e-b5fb-567f0c52c6e4"
+        "guid": "e016f9a5-16e2-4008-bceb-3276a0fbd3aa"
     },
     "wobj_xaxis": {
         "dtype": "compas.geometry/Point",
@@ -4263,7 +4263,7 @@
             0.0,
             0.0
         ],
-        "guid": "d6b32079-b4fa-4e32-94e1-b8e0a37e22a3"
+        "guid": "bd7e0119-4e57-4752-9558-4268031cdcb8"
     },
     "wobj_yaxis": {
         "dtype": "compas.geometry/Point",
@@ -4272,6 +4272,6 @@
             1000.0,
             0.0
         ],
-        "guid": "176b4500-dbbf-4468-b40a-8cae9d3ce513"
+        "guid": "c1afa567-c0d5-484c-9f58-875e6fc6fd88"
     }
 }

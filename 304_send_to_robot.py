@@ -13,6 +13,23 @@ import compas_rrc as rrc
 from compas.data import json_load
 from compas.geometry import Frame, Vector
 
+from fixed_geometry import SPHERE_CENTER, SAFETY_RADIUS
+from view_utils import show_comparison
+
+############## Mode ##############
+# "preview" -- shows the toolpath in compas_viewer only. NO robot
+#              connection is attempted at all.
+# "execute" -- connects to ROS/ABB and runs the staged TEST_STEP below.
+MODE = "preview"
+
+# "fixed"  -- lock every frame's orientation to the one measured live at
+#             HOME_CONFIG (Ruth's original behavior). All spray points
+#             share one identical orientation.
+# "radial" -- keep each frame's own per-point orientation from the tween
+#             (302's output) -- each frame points radially, away from
+#             SPHERE_CENTER, toward the material.
+ORIENTATION_MODE = "radial"
+
 ############## Constants ##############
 
 HOME_CONFIG = [90.0, 15.0, -150.0, -5.0, -40.0, -215.0]
@@ -26,9 +43,12 @@ HOME_SPEED = 300
 APPROACH_SPEED = 200
 TOOLPATH_SPEED = 600
 
-SAFE_OFFSET = 200.0
+SAFE_OFFSET = 100.0        # 10cm retreat, toward SPHERE_CENTER (not world Z)
 PUMP_START_DELAY = 2.0
 
+PROCESSED_DIR = Path(__file__).resolve().parent / "data" / "processed"
+
+# Only used when MODE = "execute":
 # 0 = Communication only
 # 1 = Read current robot position
 # 2 = Move to HOME_CONFIG
@@ -36,6 +56,14 @@ PUMP_START_DELAY = 2.0
 # 4 = Move to first toolpath frame
 # 5 = Follow complete toolpath
 TEST_STEP = 5
+
+
+def latest_processed_path():
+    files = sorted(PROCESSED_DIR.glob("*_processed.json"), key=lambda p: p.stat().st_mtime)
+    if not files:
+        raise FileNotFoundError(f"No processed files found in {PROCESSED_DIR}")
+    return files[-1]
+
 
 ############## Toolpath ##############
 
@@ -69,9 +97,23 @@ class Toolpath:
         return Toolpath(fixed)
 
     @staticmethod
-    def safe_frame(frame, offset=SAFE_OFFSET):
-        safe = Frame(frame.point, frame.xaxis, frame.yaxis)
-        return safe.translated(Vector(0, 0, offset))
+    def safe_frame(frame, offset=SAFE_OFFSET, toward=SPHERE_CENTER):
+        """A frame at `frame`'s position, retracted `offset` mm toward
+        `toward` (SPHERE_CENTER by default) -- i.e. straight back off
+        the material, along the real line to center, not a fixed world
+        direction. Computed from POSITION alone, not from frame.zaxis --
+        this stays correct regardless of which ORIENTATION_MODE is active."""
+        direction = Vector.from_start_end(frame.point, toward)
+        direction.unitize()
+        safe_point = frame.point + direction * offset
+        return Frame(safe_point, frame.xaxis, frame.yaxis)
+
+    def with_approach_and_retract(self, offset=SAFE_OFFSET):
+        """Returns a NEW Toolpath with a retracted approach frame prepended
+        and a retracted retract frame appended -- for PREVIEW display only."""
+        safe_first = self.safe_frame(self.first, offset)
+        safe_last = self.safe_frame(self.last, offset)
+        return Toolpath([safe_first] + self.frames + [safe_last])
 
     @property
     def first(self):
@@ -216,9 +258,16 @@ class ToolpathExecutor:
         print("Home nozzle Y-axis:", home_frame.yaxis)
         print("Home nozzle Z-axis:", home_frame.zaxis)
 
-        # Keep toolpath positions, lock orientation to the one measured at HOME_CONFIG.
-        self.toolpath = self.toolpath.with_fixed_orientation(home_frame)
-        print("\nFirst frame with home orientation:", self.toolpath.first)
+        print(f"\nORIENTATION_MODE = {ORIENTATION_MODE!r}")
+        if ORIENTATION_MODE == "fixed":
+            print("Locking every frame to HOME's live orientation.")
+            self.toolpath = self.toolpath.with_fixed_orientation(home_frame)
+        elif ORIENTATION_MODE == "radial":
+            print("Keeping each frame's own per-point orientation from the tween.")
+        else:
+            raise ValueError(f"Unknown ORIENTATION_MODE: {ORIENTATION_MODE!r} -- use 'fixed' or 'radial'.")
+
+        print("\nFirst frame:", self.toolpath.first)
 
     def step_3_move_safe(self):
         self.robot.abb.send_and_wait(rrc.PrintText("Moving to safe toolpath frame"))
@@ -293,12 +342,37 @@ class ToolpathExecutor:
 ############## Main ##############
 
 def main():
-    default_data_file = Path(__file__).resolve().parent / "data" / "processed" / "path_processed.json"
-    data_file = Path(sys.argv[1]) if len(sys.argv) > 1 else default_data_file
+    data_file = Path(sys.argv[1]) if len(sys.argv) > 1 else latest_processed_path()
 
     toolpath = Toolpath.from_json(data_file)
     toolpath.check()
 
+    if MODE == "preview":
+        print("\n=== PREVIEW MODE -- no robot connection will be made ===")
+        print(f"ORIENTATION_MODE = {ORIENTATION_MODE!r}")
+
+        if ORIENTATION_MODE == "fixed":
+            print("Fixed-mode preview uses the FIRST frame's own orientation as a stand-in")
+            print("for HOME's live orientation -- the real one is only known once connected.")
+            oriented = toolpath.with_fixed_orientation(toolpath.first)
+        elif ORIENTATION_MODE == "radial":
+            oriented = toolpath
+        else:
+            raise ValueError(f"Unknown ORIENTATION_MODE: {ORIENTATION_MODE!r} -- use 'fixed' or 'radial'.")
+
+        preview_toolpath = oriented.with_approach_and_retract()
+        print(f"Preview includes retracted approach/retract frames -- {SAFE_OFFSET} mm toward SPHERE_CENTER.")
+        show_comparison(
+            preview_toolpath.frames, preview_toolpath.frames,
+            sphere_center=SPHERE_CENTER, safety_radius=SAFETY_RADIUS,
+        )
+        return
+
+    if MODE != "execute":
+        raise ValueError(f"Unknown MODE: {MODE!r} -- use 'preview' or 'execute'.")
+
+    print("\n=== EXECUTE MODE -- connecting to robot ===")
+    print(f"ORIENTATION_MODE = {ORIENTATION_MODE!r}")
     try:
         with RobotSession() as robot:
             ToolpathExecutor(robot, toolpath).run(TEST_STEP)
