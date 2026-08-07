@@ -16,8 +16,10 @@ real robot -- deliberately not a flag here, so a robot move never gets
 triggered as a side effect of just running this pipeline end to end.
 """
 
+import json
 import sys
 import subprocess
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -32,6 +34,32 @@ def latest_input_path():
     return latest_folder / "path.json"
 
 
+def describe_input(path):
+    received_at = datetime.fromtimestamp(path.stat().st_mtime).strftime("%Y-%m-%d %H:%M:%S")
+
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    if "strokes" in data:
+        stroke_count = len(data["strokes"])
+        point_count = sum(len(stroke) for stroke in data["strokes"])
+    elif "frames" in data:
+        stroke_count = None
+        point_count = len(data["frames"])
+    else:
+        stroke_count = point_count = None
+
+    print("=== Received input ===")
+    print(f"Folder:   {path.parent.name}")
+    print(f"File:     {path}")
+    print(f"Modified: {received_at}")
+    if stroke_count is not None:
+        print(f"Strokes:  {stroke_count}")
+    if point_count is not None:
+        print(f"Points:   {point_count}")
+    print()
+
+
 INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else latest_input_path()
 
 BASE_NAME = INPUT_PATH.stem
@@ -41,7 +69,8 @@ if BASE_NAME == "path":
 CONVERTED_PATH = ROOT / "data" / "compas" / f"{BASE_NAME}_compas.json"
 PROCESSED_PATH = ROOT / "data" / "processed" / f"{BASE_NAME}_processed.json"
 
-print(f"Using input: {INPUT_PATH}")
+describe_input(INPUT_PATH)
+input("Press Enter to continue...")
 
 print("=== 301: convert ===")
 subprocess.run(["python", "301_convert_to_compas_json.py", str(INPUT_PATH)], check=True)

@@ -40,8 +40,8 @@ if BASE_NAME.endswith("_compas"):
 
 ############## Constants ##############
 
-TARGET_RADIUS = 1500.0   # radius the toolpath lands on when T = 1.0
-T = 0.75                 # blend factor: 0.0 = curve A (original), 1.0 = curve B (on target sphere)
+TARGET_RADIUS = 400.0   # radius the toolpath lands on when T = 1.0
+T = 0.25                 # blend factor: 0.0 = curve A (original), 1.0 = curve B (on target sphere)
 
 
 ############## Radial Shell ##############
