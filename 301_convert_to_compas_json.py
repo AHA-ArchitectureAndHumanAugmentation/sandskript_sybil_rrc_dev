@@ -40,8 +40,7 @@ if BASE_NAME == "path":
 OUTPUT_DIR = PROJECT_ROOT / "data" / "compas"
 OUTPUT_PATH = OUTPUT_DIR / f"{BASE_NAME}_compas.json"
 
-# COORDINATE_SCALE = 1000.0   # metres -> millimetres (current test data)
-COORDINATE_SCALE = 1.0    # uncomment this line (and comment the one above) 
+COORDINATE_SCALE = 1.0    # Lin's pipeline outputs mm natively -- confirmed, no conversion needed
 
 
 def new_guid() -> str:
@@ -104,6 +103,7 @@ def convert_to_compas(source: dict[str, Any]) -> dict[str, Any]:
     return {
         "strokes": stroke_frames,
         "frames": flat_frames,
+        "tile_id": source.get("tile_id"),
         "wobj_origin": make_compas_point(DEFAULT_WOBJ_ORIGIN),
         "wobj_xaxis": make_compas_point(DEFAULT_WOBJ_XAXIS),
         "wobj_yaxis": make_compas_point(DEFAULT_WOBJ_YAXIS),

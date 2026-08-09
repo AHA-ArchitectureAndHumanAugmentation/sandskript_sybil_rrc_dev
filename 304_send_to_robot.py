@@ -15,6 +15,7 @@ from compas.geometry import Frame, Vector
 
 from fixed_geometry import SPHERE_CENTER, SAFETY_RADIUS
 from view_utils import show_comparison
+from tile_status import SprayRecord
 
 ############## Mode ##############
 # "preview" -- shows the toolpath in compas_viewer only. NO robot
@@ -39,22 +40,17 @@ WORK_OBJECT = "wobj0"
 SPRAY_OUTPUT = "ABB_Scalable_IO_0_DO1"
 PUMP_OUTPUT = "ABB_Scalable_IO_0_DO2"
 
-HOME_SPEED = 50
-APPROACH_SPEED = 50
-TOOLPATH_SPEED = 50
+HOME_SPEED = 300
+APPROACH_SPEED = 200
+TOOLPATH_SPEED = 600
 
-SAFE_OFFSET = 100.0        # 10cm retreat, toward SPHERE_CENTER (not world Z)
+SAFE_OFFSET = 100.0
 PUMP_START_DELAY = 2.0
+
+SPRAY_TYPE = "water"  # "water" or "substrate" -- which substance THIS run sprays
 
 PROCESSED_DIR = Path(__file__).resolve().parent / "data" / "processed"
 
-# Only used when MODE = "execute":
-# 0 = Communication only
-# 1 = Read current robot position
-# 2 = Move to HOME_CONFIG
-# 3 = Move to safe frame
-# 4 = Move to first toolpath frame
-# 5 = Follow complete toolpath
 TEST_STEP = 5
 
 
@@ -68,52 +64,43 @@ def latest_processed_path():
 ############## Toolpath ##############
 
 class Toolpath:
-    """Loads and validates a list of COMPAS Frames from JSON."""
-
-    def __init__(self, frames):
+    def __init__(self, frames, tile_id=None):
         if not frames:
             raise ValueError("The toolpath contains no frames.")
         self.frames = frames
+        self.tile_id = tile_id
 
     @classmethod
     def from_json(cls, filepath):
         data = json_load(filepath)
         if "frames" not in data:
             raise KeyError("The JSON file does not contain 'frames'.")
-        return cls(data["frames"])
+        return cls(data["frames"], tile_id=data.get("tile_id"))
 
     def check(self):
         print("Number of toolpath frames:", len(self.frames))
+        print("Tile ID:", self.tile_id)
         print("First toolpath frame:", self.frames[0])
         print("Last toolpath frame:", self.frames[-1])
 
     def with_fixed_orientation(self, orientation_frame):
-        """Keeps positions, replaces every frame's orientation with
-        orientation_frame's axes -- locks the nozzle to a fixed direction."""
         fixed = [
             Frame(point=frame.point, xaxis=orientation_frame.xaxis, yaxis=orientation_frame.yaxis)
             for frame in self.frames
         ]
-        return Toolpath(fixed)
+        return Toolpath(fixed, tile_id=self.tile_id)
 
     @staticmethod
     def safe_frame(frame, offset=SAFE_OFFSET, toward=SPHERE_CENTER):
-        """A frame at `frame`'s position, retracted `offset` mm toward
-        `toward` (SPHERE_CENTER by default) -- i.e. straight back off
-        the material, along the real line to center, not a fixed world
-        direction. Computed from POSITION alone, not from frame.zaxis --
-        this stays correct regardless of which ORIENTATION_MODE is active."""
         direction = Vector.from_start_end(frame.point, toward)
         direction.unitize()
         safe_point = frame.point + direction * offset
         return Frame(safe_point, frame.xaxis, frame.yaxis)
 
     def with_approach_and_retract(self, offset=SAFE_OFFSET):
-        """Returns a NEW Toolpath with a retracted approach frame prepended
-        and a retracted retract frame appended -- for PREVIEW display only."""
         safe_first = self.safe_frame(self.first, offset)
         safe_last = self.safe_frame(self.last, offset)
-        return Toolpath([safe_first] + self.frames + [safe_last])
+        return Toolpath([safe_first] + self.frames + [safe_last], tile_id=self.tile_id)
 
     @property
     def first(self):
@@ -134,8 +121,6 @@ class Toolpath:
 ############## Robot Session ##############
 
 class RobotSession:
-    """Owns the ROS/ABB connection plus low-level move/IO commands."""
-
     def __init__(self):
         self.ros = None
         self.abb = None
@@ -202,8 +187,6 @@ class RobotSession:
 ############## Toolpath Executor ##############
 
 class ToolpathExecutor:
-    """Steps through TEST_STEP 0-5 in order, stopping at the requested step."""
-
     def __init__(self, robot, toolpath):
         self.robot = robot
         self.toolpath = toolpath
@@ -217,7 +200,6 @@ class ToolpathExecutor:
         self.step_0_communication()
         if test_step == 0:
             return
-
         self.step_1_read_position()
         if test_step == 1:
             return
@@ -227,15 +209,12 @@ class ToolpathExecutor:
         self.step_2_move_home()
         if test_step == 2:
             return
-
         self.step_3_move_safe()
         if test_step == 3:
             return
-
         self.step_4_move_first()
         if test_step == 4:
             return
-
         self.step_5_follow_toolpath()
 
     def step_0_communication(self):
@@ -254,9 +233,6 @@ class ToolpathExecutor:
 
         home_frame = self.robot.get_frame()
         print("\nHome TCP frame:", home_frame)
-        print("Home nozzle X-axis:", home_frame.xaxis)
-        print("Home nozzle Y-axis:", home_frame.yaxis)
-        print("Home nozzle Z-axis:", home_frame.zaxis)
 
         print(f"\nORIENTATION_MODE = {ORIENTATION_MODE!r}")
         if ORIENTATION_MODE == "fixed":
@@ -292,20 +268,16 @@ class ToolpathExecutor:
         try:
             self.robot.pump_on()
             pump_started = True
-
             print("\nWaiting", PUMP_START_DELAY, "seconds before opening the air valve.", flush=True)
             self.robot.abb.send_and_wait(rrc.WaitTime(PUMP_START_DELAY))
-
             self.robot.spray_on()
             spray_started = True
 
             for index, frame in enumerate(remaining_frames, start=2):
                 is_last_frame = index == total_frames
                 print("Sending frame", index, "of", total_frames, flush=True)
-
                 zone = rrc.Zone.FINE if is_last_frame else rrc.Zone.Z10
                 command = rrc.MoveToFrame(frame, speed=TOOLPATH_SPEED, zone=zone, motion_type=rrc.Motion.LINEAR)
-
                 if is_last_frame:
                     self.robot.abb.send_and_wait(command)
                 else:
@@ -324,19 +296,15 @@ class ToolpathExecutor:
 
         joints, external_axes = self.robot.get_joints()
         print("Complete toolpath finished.", flush=True)
-        print("Final toolpath robot joints:", joints, flush=True)
 
         final_safe_frame = self.toolpath.safe_frame(self.toolpath.last)
-
         self.robot.abb.send_and_wait(rrc.PrintText("Retracting from toolpath"))
         self.robot.move_to_frame(final_safe_frame, APPROACH_SPEED, "final safe frame")
-
         self.robot.abb.send_and_wait(rrc.PrintText("Returning to home configuration"))
         self.robot.move_to_home()
 
         final_joints, final_external_axes = self.robot.get_joints()
         print("Robot returned to HOME_CONFIG.", flush=True)
-        print("Final robot joints:", final_joints, flush=True)
 
 
 ############## Main ##############
@@ -349,19 +317,7 @@ def main():
 
     if MODE == "preview":
         print("\n=== PREVIEW MODE -- no robot connection will be made ===")
-        print(f"ORIENTATION_MODE = {ORIENTATION_MODE!r}")
-
-        if ORIENTATION_MODE == "fixed":
-            print("Fixed-mode preview uses the FIRST frame's own orientation as a stand-in")
-            print("for HOME's live orientation -- the real one is only known once connected.")
-            oriented = toolpath.with_fixed_orientation(toolpath.first)
-        elif ORIENTATION_MODE == "radial":
-            oriented = toolpath
-        else:
-            raise ValueError(f"Unknown ORIENTATION_MODE: {ORIENTATION_MODE!r} -- use 'fixed' or 'radial'.")
-
-        preview_toolpath = oriented.with_approach_and_retract()
-        print(f"Preview includes retracted approach/retract frames -- {SAFE_OFFSET} mm toward SPHERE_CENTER.")
+        preview_toolpath = toolpath.with_approach_and_retract()
         show_comparison(
             preview_toolpath.frames, preview_toolpath.frames,
             sphere_center=SPHERE_CENTER, safety_radius=SAFETY_RADIUS,
@@ -372,10 +328,18 @@ def main():
         raise ValueError(f"Unknown MODE: {MODE!r} -- use 'preview' or 'execute'.")
 
     print("\n=== EXECUTE MODE -- connecting to robot ===")
-    print(f"ORIENTATION_MODE = {ORIENTATION_MODE!r}")
     try:
         with RobotSession() as robot:
             ToolpathExecutor(robot, toolpath).run(TEST_STEP)
+
+        # Only a REAL, complete run (TEST_STEP 5) counts as a spray.
+        if TEST_STEP == 5:
+            if toolpath.tile_id is None:
+                print("\nNo tile_id in the processed file -- skipping spray record.")
+            else:
+                record_path = SprayRecord(toolpath.tile_id, SPRAY_TYPE, source_path=str(data_file)).save()
+                print(f"\nSpray recorded: tile {toolpath.tile_id}, {SPRAY_TYPE} -> {record_path}")
+
         print("\n=== SELECTED MOVEMENT TEST COMPLETED SUCCESSFULLY ===")
     except KeyboardInterrupt:
         print("\nMovement test stopped manually.")

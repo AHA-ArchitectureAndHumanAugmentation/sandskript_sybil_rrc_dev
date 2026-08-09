@@ -104,18 +104,20 @@ def main():
     if "frames" not in data:
         raise KeyError("The JSON file does not contain 'frames'.")
     original_frames = data["frames"]
+    tile_id = data.get("tile_id")
 
     points_on_surface = [frame.point for frame in original_frames]
     morph = ToolpathMorph(points_on_surface, SPHERE_CENTER, TARGET_RADIUS, SAFETY_RADIUS)
-
     tweened = morph.tween_frames(T)
 
     outdir = ROOT / "data" / "processed"
     outdir.mkdir(exist_ok=True)
     outfile = outdir / f"{BASE_NAME}_processed.json"
-    json_dump({"frames": tweened}, outfile)
+    json_dump({"frames": tweened, "tile_id": tile_id}, outfile)
 
     print(f"Saved {len(tweened)} frames to {outfile}")
+    if tile_id is not None:
+        print(f"Tile ID: {tile_id}")
 
     show_comparison(
         original_frames, tweened,
