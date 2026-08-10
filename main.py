@@ -32,7 +32,7 @@ import zmq
 
 import pipeline_utils as pu
 
-RUN_MODE = "single"  # "single" or "autonomous"
+RUN_MODE = "autonomous"  # "single" or "autonomous"
 
 BIND_ADDRESS = "tcp://127.0.0.1:5557"
 CONNECT_ADDRESS = "tcp://127.0.0.1:5557"

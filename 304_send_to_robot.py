@@ -16,22 +16,36 @@ from compas.geometry import Frame, Vector
 from fixed_geometry import SPHERE_CENTER, SAFETY_RADIUS
 from view_utils import show_comparison
 from tile_status import SprayRecord
+from tile_selector import TileSelector
+from tile_announcer import TileAnnouncer
 
 ############## Mode ##############
-# "preview" -- shows the toolpath in compas_viewer only. NO robot
-#              connection is attempted at all.
-# "execute" -- connects to ROS/ABB and runs the staged TEST_STEP below.
+# "preview"     -- shows the toolpath in compas_viewer only. NO robot
+#                   connection is attempted at all.
+# "execute"     -- connects to ROS/ABB and runs the staged TEST_STEP below.
+# "test_record" -- TESTING ONLY. Simulates a successful spray -- runs
+#                   record_spray_and_select_next() exactly as execute
+#                   mode would after a real TEST_STEP 5 success, but
+#                   skips RobotSession/ToolpathExecutor entirely. NO
+#                   robot connection is attempted. Safe to run anytime.
 MODE = "preview"
+ORIENTATION_MODE = "radial"
 
-# "fixed"  -- lock every frame's orientation to the one measured live at
-#             HOME_CONFIG (Ruth's original behavior). All spray points
-#             share one identical orientation.
-# "radial" -- keep each frame's own per-point orientation from the tween
-#             (302's output) -- each frame points radially, away from
-#             SPHERE_CENTER, toward the material.
-ORIENTATION_MODE = "fixed"
+# *** TEMPORARY -- FOR DEMO PURPOSES ONLY ***
+# When True, PREVIEW mode ALSO records the spray + selects/announces
+# the next tile, as if it had actually run. Lets you demo the full
+# loop (receive -> process -> preview -> record -> select -> announce)
+# with zero robot connection. SET THIS BACK TO FALSE once the demo is
+# done -- otherwise every future safe preview run keeps writing fake
+# executions into data/executed/, corrupting real tile eligibility data.
+RECORD_IN_PREVIEW = True
 
 ############## Constants ##############
+# HOME_CONFIG, TOOL_NAME, WORK_OBJECT below are CALIBRATED to this
+# specific robot -- confirmed correct by Charlotte. NEVER revert these
+# to Ruth's original reference-script values (HOME_CONFIG was a
+# different set of joint angles; WORK_OBJECT was "wobj_SprayingNet",
+# already fixed to "wobj0" in an earlier session -- don't undo that fix).
 
 HOME_CONFIG = [-89.68, -8.48, -191.38, -0.58, 22.8, -0.25]
 TOOL_NAME = "t_SprayingTool"
@@ -59,6 +73,24 @@ def latest_processed_path():
     if not files:
         raise FileNotFoundError(f"No processed files found in {PROCESSED_DIR}")
     return files[-1]
+
+
+def record_spray_and_select_next(toolpath, data_file):
+    """Records the spray for toolpath.tile_id, then selects and
+    announces the next tile. Called after a REAL execute-mode run
+    succeeds, from test_record mode, and (if RECORD_IN_PREVIEW is True)
+    from preview mode too -- factored out once, so these paths can't
+    quietly diverge from each other."""
+    if toolpath.tile_id is None:
+        print("\nNo tile_id in the processed file -- skipping spray record.")
+        return
+
+    record_path = SprayRecord(toolpath.tile_id, SPRAY_TYPE, source_path=str(data_file)).save()
+    print(f"\nSpray recorded: tile {toolpath.tile_id}, {SPRAY_TYPE} -> {record_path}")
+
+    next_tile = TileSelector(spray_type=SPRAY_TYPE).select()
+    with TileAnnouncer() as announcer:
+        announcer.announce(next_tile)
 
 
 ############## Toolpath ##############
@@ -322,23 +354,26 @@ def main():
             preview_toolpath.frames, preview_toolpath.frames,
             sphere_center=SPHERE_CENTER, safety_radius=SAFETY_RADIUS,
         )
+        if RECORD_IN_PREVIEW:
+            print("\n*** RECORD_IN_PREVIEW is True -- recording this as if it were a real spray. ***")
+            record_spray_and_select_next(toolpath, data_file)
+        return
+
+    if MODE == "test_record":
+        print("\n=== TEST_RECORD MODE -- simulating a successful spray, NO robot connection made ===")
+        record_spray_and_select_next(toolpath, data_file)
         return
 
     if MODE != "execute":
-        raise ValueError(f"Unknown MODE: {MODE!r} -- use 'preview' or 'execute'.")
+        raise ValueError(f"Unknown MODE: {MODE!r} -- use 'preview', 'execute', or 'test_record'.")
 
     print("\n=== EXECUTE MODE -- connecting to robot ===")
     try:
         with RobotSession() as robot:
             ToolpathExecutor(robot, toolpath).run(TEST_STEP)
 
-        # Only a REAL, complete run (TEST_STEP 5) counts as a spray.
         if TEST_STEP == 5:
-            if toolpath.tile_id is None:
-                print("\nNo tile_id in the processed file -- skipping spray record.")
-            else:
-                record_path = SprayRecord(toolpath.tile_id, SPRAY_TYPE, source_path=str(data_file)).save()
-                print(f"\nSpray recorded: tile {toolpath.tile_id}, {SPRAY_TYPE} -> {record_path}")
+            record_spray_and_select_next(toolpath, data_file)
 
         print("\n=== SELECTED MOVEMENT TEST COMPLETED SUCCESSFULLY ===")
     except KeyboardInterrupt:
