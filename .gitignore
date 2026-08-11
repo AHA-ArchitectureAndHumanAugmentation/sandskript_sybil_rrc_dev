@@ -1,3 +1,6 @@
 __pycache__/
 converted_toolpath/*.json
 processed_toolpath/*.json
+
+# Office lock files (created while a .docx/.xlsx/.pptx is open elsewhere)
+~$*
