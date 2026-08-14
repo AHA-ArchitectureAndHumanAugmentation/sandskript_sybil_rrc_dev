@@ -1,0 +1,78 @@
+{
+    "strokes": [
+        [
+            {
+                "dtype": "compas.geometry/Frame",
+                "data": {
+                    "point": [
+                        400.0,
+                        0.0,
+                        200.0
+                    ],
+                    "xaxis": [
+                        1.0,
+                        0.0,
+                        0.0
+                    ],
+                    "yaxis": [
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                },
+                "guid": "f39bc5ea-5ea7-4067-9df0-e7d7fbe9da2a"
+            }
+        ]
+    ],
+    "frames": [
+        {
+            "dtype": "compas.geometry/Frame",
+            "data": {
+                "point": [
+                    400.0,
+                    0.0,
+                    200.0
+                ],
+                "xaxis": [
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "yaxis": [
+                    0.0,
+                    1.0,
+                    0.0
+                ]
+            },
+            "guid": "f39bc5ea-5ea7-4067-9df0-e7d7fbe9da2a"
+        }
+    ],
+    "tile_id": 3,
+    "wobj_origin": {
+        "dtype": "compas.geometry/Point",
+        "data": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "guid": "6ccbef69-a88c-418c-934d-e06980a9221f"
+    },
+    "wobj_xaxis": {
+        "dtype": "compas.geometry/Point",
+        "data": [
+            1000.0,
+            0.0,
+            0.0
+        ],
+        "guid": "77ada6d9-64cb-4690-b8bb-6d0eb7911fae"
+    },
+    "wobj_yaxis": {
+        "dtype": "compas.geometry/Point",
+        "data": [
+            0.0,
+            1000.0,
+            0.0
+        ],
+        "guid": "b5fea1b5-8a5c-4ba5-b796-9035d1269617"
+    }
+}

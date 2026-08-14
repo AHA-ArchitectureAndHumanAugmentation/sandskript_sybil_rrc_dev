@@ -22,6 +22,7 @@ between a capture and an actual robot move. Neither RUN_MODE here
 changes that gate -- check 304's MODE before pressing Enter.
 """
 
+from email.mime import message
 import subprocess
 import sys
 import threading
@@ -35,9 +36,10 @@ import pipeline_utils as pu
 RUN_MODE = "autonomous"  # "single" or "autonomous"
 
 BIND_ADDRESS = "tcp://127.0.0.1:5557"
-CONNECT_ADDRESS = "tcp://127.0.0.1:5557"
+CONNECT_ADDRESS = "tcp://127.0.0.1:5558"
 POLL_INTERVAL = 2.0
 
+ENABLE_TESTING_WATCHER = False  # True = also self-send GH exports for testing; False = only real ZeroMQ senders (Lin)
 
 def run_single():
     input_path = Path(sys.argv[1]) if len(sys.argv) > 1 else pu.latest_input_path()
@@ -63,7 +65,7 @@ def testing_watcher_thread():
             seen.add(folder)
             path_json = folder / "path.json"
             if pu.is_file_stable(path_json):
-                sender.send_string(str(path_json))
+                sender.send_string(path_json.read_text(encoding="utf-8"))
                 print(f"[testing watcher] Sent: {path_json}")
 
 
@@ -72,16 +74,19 @@ def run_autonomous():
     receiver = context.socket(zmq.PULL)
     receiver.bind(BIND_ADDRESS)
 
-    threading.Thread(target=testing_watcher_thread, daemon=True).start()
+    if ENABLE_TESTING_WATCHER:
+        threading.Thread(target=testing_watcher_thread, daemon=True).start()
 
     print("=== AUTONOMOUS MODE ===")
     print(f"Listening on {BIND_ADDRESS}")
-    print(f"TESTING watcher active on {pu.IN_DIR} -- new folders there get sent automatically.")
+    if ENABLE_TESTING_WATCHER:
+        print(f"TESTING watcher active on {pu.IN_DIR} -- new folders there get sent automatically.")
     print("Each capture pauses for Enter before processing. Ctrl+C to stop.\n")
 
     try:
         while True:
-            input_path = Path(receiver.recv_string())
+            message = receiver.recv_string()
+            input_path = pu.save_received_capture(message)
             if not input_path.is_file():
                 print(f"Received path does not exist, skipping: {input_path}")
                 continue

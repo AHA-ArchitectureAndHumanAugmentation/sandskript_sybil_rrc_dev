@@ -72,6 +72,23 @@ def describe_input(path):
     print()
 
 
+def save_received_capture(json_content):
+    """Writes a raw JSON string (received over ZeroMQ) into a new
+    timestamped data/in/ folder -- same convention as a GH export or a
+    real capture landing on disk directly. Returns the path.json path.
+
+    This exists because the message payload is the actual JSON content,
+    not a file path already sitting on the local machine -- a path only
+    means anything on the sender's own filesystem, which breaks the
+    moment the sender is a genuinely separate process, like Lin's."""
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    folder = IN_DIR / timestamp
+    folder.mkdir(parents=True, exist_ok=True)
+    path_json = folder / "path.json"
+    path_json.write_text(json_content, encoding="utf-8")
+    return path_json
+
+
 def run_pipeline(input_path):
     """Runs 301 -> 302 -> 304 on one capture. The ONE place this
     sequence is defined -- everything else calls this instead of

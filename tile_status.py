@@ -1,99 +1,68 @@
 """
 tile_status.py
 
-Every executed spray is saved as a full COPY of its processed toolpath
-file, in data/executed/ -- so each record is self-contained: you can
-see exactly what geometry actually ran, not just a pointer back to
-data/processed/ (whose contents could later be overwritten or cleaned out).
+Spray history for eligibility checks lives in ONE file:
+data/tiles/tile_status.json -- read and rewritten on every spray, so it's
+always current and fast to check.
 
-data/processed/  -- what gets SENT to the robot (302's output, 304's input)
-data/executed/   -- what ACTUALLY ran, saved after a successful spray.
-                    tile_selector.py and all status/eligibility checks
-                    read from here.
-
-Filename encodes everything TileHistory needs, so status checks never
-have to open/parse the COMPAS frame data inside:
-    <YYYYMMDD>_<HHMMSS>_tile<N>_<water|substrate>.json
+data/executed/ is UNCHANGED -- still a full copy of every executed
+toolpath, the real audit trail. tile_status.json is a fast INDEX built
+from that trail, not a replacement for it.
 """
 
+import json
 import shutil
 from datetime import datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+STATUS_PATH = ROOT / "data" / "tiles" / "tile_status.json"
 EXECUTED_DIR = ROOT / "data" / "executed"
 
-TIMESTAMP_FORMAT = "%Y%m%d_%H%M%S"
-
-# Single source of truth -- tile_selector.py imports this. Change it
-# HERE to scale up or down; nothing else needs editing.
 TOTAL_TILES = 4
 
 
-class SprayRecord:
-    """One executed spray -- a full copy of the processed toolpath file
-    that was actually sent to the robot, saved into data/executed/ with
-    tile_id/spray_type/timestamp encoded in the filename."""
+def _empty_status():
+    return {str(t): {"water_sprays": [], "substrate_sprays": []} for t in range(1, TOTAL_TILES + 1)}
 
-    def __init__(self, tile_id, spray_type, source_path, timestamp=None):
-        self.tile_id = tile_id
-        self.spray_type = spray_type  # "water" or "substrate"
-        self.source_path = Path(source_path)
-        self.timestamp = timestamp or datetime.now()
 
-    def filename(self):
-        return f"{self.timestamp.strftime(TIMESTAMP_FORMAT)}_tile{self.tile_id}_{self.spray_type}.json"
+def _load():
+    if not STATUS_PATH.is_file():
+        return _empty_status()
+    return json.loads(STATUS_PATH.read_text(encoding="utf-8"))
 
-    def save(self):
-        """Copies the actual processed toolpath file into data/executed/.
-        Returns the new file's path."""
-        EXECUTED_DIR.mkdir(parents=True, exist_ok=True)
-        dest = EXECUTED_DIR / self.filename()
-        shutil.copy2(self.source_path, dest)
-        return dest
 
-    @classmethod
-    def from_filename(cls, path):
-        """Parses tile_id/spray_type/timestamp back out of an executed
-        file's name. Returns None if it doesn't match the pattern
-        (e.g. leftover files from before this naming scheme)."""
-        parts = path.stem.split("_")
-        if len(parts) != 4:
-            return None
-        date_part, time_part, tile_part, spray_type = parts
-        try:
-            timestamp = datetime.strptime(f"{date_part}_{time_part}", TIMESTAMP_FORMAT)
-            tile_id = int(tile_part.replace("tile", ""))
-        except ValueError:
-            return None
-        return cls(tile_id, spray_type, source_path=path, timestamp=timestamp)
+def _save(status):
+    STATUS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    STATUS_PATH.write_text(json.dumps(status, indent=4), encoding="utf-8")
 
-    @classmethod
-    def load_all(cls):
-        if not EXECUTED_DIR.is_dir():
-            return []
-        records = [cls.from_filename(f) for f in EXECUTED_DIR.glob("*.json")]
-        return [r for r in records if r is not None]
+
+def record_spray(tile_id, spray_type, timestamp=None):
+    status = _load()
+    ts = (timestamp or datetime.now()).isoformat(timespec="seconds")
+    key = f"{spray_type}_sprays"
+    status.setdefault(str(tile_id), {"water_sprays": [], "substrate_sprays": []})
+    status[str(tile_id)].setdefault(key, [])
+    status[str(tile_id)][key].append(ts)
+    _save(status)
+    return ts
 
 
 class TileHistory:
-    """A tile's own records, and what it can tell you about itself."""
-
-    def __init__(self, tile_id, records):
+    def __init__(self, tile_id, status=None):
         self.tile_id = tile_id
-        self.records = [r for r in records if r.tile_id == tile_id]
+        self._entry = (status or _load()).get(str(tile_id), {"water_sprays": [], "substrate_sprays": []})
 
     def count(self, spray_type, hours=None):
-        matching = [r for r in self.records if r.spray_type == spray_type]
+        timestamps = self._entry.get(f"{spray_type}_sprays", [])
         if hours is None:
-            return len(matching)
+            return len(timestamps)
         cutoff = datetime.now() - timedelta(hours=hours)
-        return sum(1 for r in matching if r.timestamp >= cutoff)
+        return sum(1 for ts in timestamps if datetime.fromisoformat(ts) >= cutoff)
 
     def last_sprayed_at(self, spray_type):
-        """Returns a datetime, or None if never sprayed."""
-        matching = [r.timestamp for r in self.records if r.spray_type == spray_type]
-        return max(matching) if matching else None
+        timestamps = self._entry.get(f"{spray_type}_sprays", [])
+        return datetime.fromisoformat(max(timestamps)) if timestamps else None
 
     def describe(self, window_hours=12):
         last = self.last_sprayed_at("water")
@@ -108,11 +77,47 @@ class TileHistory:
 
     @classmethod
     def for_tile(cls, tile_id):
-        return cls(tile_id, SprayRecord.load_all())
+        return cls(tile_id)
+
+
+class SprayRecord:
+    def __init__(self, tile_id, spray_type, source_path, timestamp=None):
+        self.tile_id = tile_id
+        self.spray_type = spray_type
+        self.source_path = Path(source_path)
+        self.timestamp = timestamp or datetime.now()
+
+    def save(self):
+        EXECUTED_DIR.mkdir(parents=True, exist_ok=True)
+        ts_str = self.timestamp.strftime("%Y%m%d_%H%M%S")
+        dest = EXECUTED_DIR / f"{ts_str}_tile{self.tile_id}_{self.spray_type}.json"
+        shutil.copy2(self.source_path, dest)
+        record_spray(self.tile_id, self.spray_type, self.timestamp)
+        return dest
+
+
+def rebuild_from_executed():
+    status = _empty_status()
+    if EXECUTED_DIR.is_dir():
+        for f in sorted(EXECUTED_DIR.glob("*.json")):
+            parts = f.stem.split("_")
+            if len(parts) != 4:
+                continue
+            date_part, time_part, tile_part, spray_type = parts
+            try:
+                ts = datetime.strptime(f"{date_part}_{time_part}", "%Y%m%d_%H%M%S").isoformat(timespec="seconds")
+                tile_id = tile_part.replace("tile", "")
+            except ValueError:
+                continue
+            status.setdefault(tile_id, {"water_sprays": [], "substrate_sprays": []})
+            status[tile_id].setdefault(f"{spray_type}_sprays", [])
+            status[tile_id][f"{spray_type}_sprays"].append(ts)
+    _save(status)
+    print(f"Rebuilt {STATUS_PATH} from {EXECUTED_DIR}")
+    return status
 
 
 if __name__ == "__main__":
-    print(f"Executed records directory: {EXECUTED_DIR}\n")
-    print("Current status, all tiles:")
+    print(f"Status file: {STATUS_PATH}\n")
     for tile_id in range(1, TOTAL_TILES + 1):
         print(" ", TileHistory.for_tile(tile_id).describe())
