@@ -15,21 +15,22 @@ from compas.geometry import Frame, Vector
 
 from fixed_geometry import SPHERE_CENTER, SAFETY_RADIUS
 from view_utils import show_comparison
+from robot_kinematics import forward_kinematics
 from tile_status import SprayRecord
 from tile_selector import TileSelector
 from tile_announcer import TileAnnouncer
 
 ############## Mode ##############
-# "preview"     -- shows the toolpath in compas_viewer only. NO robot
-#                   connection is attempted at all.
-# "execute"     -- connects to ROS/ABB and runs the staged TEST_STEP below.
-# "test_record" -- TESTING ONLY. Simulates a successful spray -- runs
-#                   record_spray_and_select_next() exactly as execute
-#                   mode would after a real TEST_STEP 5 success, but
-#                   skips RobotSession/ToolpathExecutor entirely. NO
-#                   robot connection is attempted. Safe to run anytime.
-MODE = "preview"
-ORIENTATION_MODE = "radial"
+# "preview"     -- shows the toolpath in compas_viewer. NO robot
+#                   connection is attempted at all. If RECORD_IN_PREVIEW
+#                   is True, also records the spray + selects/announces
+#                   the next tile, as if it had actually run.
+# "execute"     -- shows the SAME preview viewer first (see show_preview
+#                   below); once that window is closed, THEN connects to
+#                   ROS/ABB and runs the staged TEST_STEP below.
+MODE = "execute"
+ORIENTATION_MODE = "fixed" #"fixed" or "radial" -- whether to lock every frame to the live orientation
+
 
 # *** TEMPORARY -- FOR DEMO PURPOSES ONLY ***
 # When True, PREVIEW mode ALSO records the spray + selects/announces
@@ -65,6 +66,12 @@ SPRAY_TYPE = "water"  # "water" or "substrate" -- which substance THIS run spray
 
 PROCESSED_DIR = Path(__file__).resolve().parent / "data" / "processed"
 
+# Path to the GoFa 10's URDF -- used ONLY to compute where HOME_CONFIG's
+# joint angles land in Cartesian space, offline, for the preview viewer.
+# Never used for anything robot-connected.
+HOME_URDF_PATH = (Path(__file__).resolve().parent
+                   / "archives" / "robot_model" / "CRB15000_10kg_152_v1" / "CRB15000_10kg_152.urdf")
+
 TEST_STEP = 5
 
 
@@ -73,6 +80,28 @@ def latest_processed_path():
     if not files:
         raise FileNotFoundError(f"No processed files found in {PROCESSED_DIR}")
     return files[-1]
+
+
+def show_preview(toolpath):
+    """
+    Opens the same compas_viewer comparison window preview mode uses.
+    Shared by both preview and execute mode so they can never show two
+    different pictures of the same toolpath.
+
+    Blocks until the viewer window is closed (compas_viewer's own
+    behavior) -- in execute mode, that's the deliberate "someone closes
+    the window and it executes" gate before anything touches the robot.
+
+    Includes the HOME_CONFIG position, computed offline via forward
+    kinematics from the URDF -- no robot connection needed or made.
+    """
+    preview_toolpath = toolpath.with_approach_and_retract()
+    home_frame = forward_kinematics(HOME_URDF_PATH, HOME_CONFIG)
+    show_comparison(
+        preview_toolpath.frames, preview_toolpath.frames,
+        sphere_center=SPHERE_CENTER, safety_radius=SAFETY_RADIUS,
+        home_frame=home_frame,
+    )
 
 
 def record_spray_and_select_next(toolpath, data_file):
@@ -349,23 +378,17 @@ def main():
 
     if MODE == "preview":
         print("\n=== PREVIEW MODE -- no robot connection will be made ===")
-        preview_toolpath = toolpath.with_approach_and_retract()
-        show_comparison(
-            preview_toolpath.frames, preview_toolpath.frames,
-            sphere_center=SPHERE_CENTER, safety_radius=SAFETY_RADIUS,
-        )
+        show_preview(toolpath)
         if RECORD_IN_PREVIEW:
             print("\n*** RECORD_IN_PREVIEW is True -- recording this as if it were a real spray. ***")
             record_spray_and_select_next(toolpath, data_file)
         return
 
-    if MODE == "test_record":
-        print("\n=== TEST_RECORD MODE -- simulating a successful spray, NO robot connection made ===")
-        record_spray_and_select_next(toolpath, data_file)
-        return
-
     if MODE != "execute":
-        raise ValueError(f"Unknown MODE: {MODE!r} -- use 'preview', 'execute', or 'test_record'.")
+        raise ValueError(f"Unknown MODE: {MODE!r} -- use 'preview' or 'execute'.")
+
+    print("\n=== EXECUTE MODE -- showing preview first; close the window to run on the robot ===")
+    show_preview(toolpath)
 
     print("\n=== EXECUTE MODE -- connecting to robot ===")
     try:
