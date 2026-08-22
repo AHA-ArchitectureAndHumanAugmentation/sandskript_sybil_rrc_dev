@@ -55,6 +55,12 @@ VERBOSE = True              # False = only warnings and errors.
                             # Set False for the exhibition so the log stays
                             # readable across an 8 hour day.
 
+RECORD_TIMINGS = True       # True = report how long each toolpath took to
+                            # sybil/schedule.py, so it plans with real
+                            # numbers instead of guesses.
+                            # Preview runs are never recorded — a simulated
+                            # duration would poison the real measurements.
+
 # ==========================================================================
 
 # compas_rrc is only needed for real robot runs. Importing it lazily means
@@ -337,13 +343,15 @@ class ToolpathExecutor:
 
     # -- once per toolpath ------------------------------------------------
 
-    def execute(self, toolpath, spray=True):
+    def execute(self, toolpath, spray=True, kind=None):
         """Sprays one toolpath and returns home.
 
         toolpath  an object with a .frames list and .safe_frame()
         spray     False runs the whole motion with pump and valve closed.
                   Used on water-only days and for dry testing: the timing
                   and the movement stay identical, no material comes out.
+        kind      "spray" or "water", so the duration is filed under the
+                  right heading. Defaults to "spray".
 
         Returns how long the whole thing took, in seconds.
         """
@@ -394,6 +402,16 @@ class ToolpathExecutor:
 
         duration = time.time() - started
         print("\nToolpath complete in {:.1f} s.".format(duration), flush=True)
+
+        # Feed the real number back so the schedule stops guessing. Preview
+        # durations are made up, so they are never recorded.
+        if RECORD_TIMINGS and not getattr(self.session, "is_preview", False):
+            try:
+                from sybil.schedule import timings
+                timings().record(kind or "spray", duration)
+            except Exception as error:
+                print("Could not record timing:", error, flush=True)
+
         return duration
 
 
